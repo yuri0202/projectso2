@@ -39,6 +39,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -171,6 +172,7 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
                 GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
                 newPoint = geometryFactory.createPoint(new Coordinate(lat, lon));
 
+               // Date nowDate = Calendar.getInstance().getTime();
                 Date nowDate = new Date();
                 String details = "";
                 if (!detailsTxt.getText().toString().equals(""))
@@ -183,7 +185,7 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
                                                         newPoint,
                                                         nowDate,
                                                         details,
-                                                        MenuActivity.utente,
+                                                        null,
                                                         MenuActivity.utente.getIdutente(),
                                                         prezzo).execute();
 
@@ -348,7 +350,7 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
             Registrazione reg = new Registrazione(0,nome,tipo,pos,data,dettagli,utente,idutente,prezzo);
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<Registrazione> entity = new HttpEntity<>(reg, headers);
-            final Registrazione finalReg =  restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/save_reg",entity,Registrazione.class);
+            final String ret =  restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/save_reg",entity,String.class);
 
 
             new Thread() {
@@ -357,11 +359,11 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
 
                         @Override
                         public void run() {
-                            Toast.makeText(activity,"Utente Registrato?",Toast.LENGTH_LONG).show();
-                            if(finalReg!=null)
-                                System.out.println("REG!=NULL");
+                            if(ret.equals("Registration successfully saved"))
+                                Toast.makeText(activity,"Registrazione effettuata con successo",Toast.LENGTH_LONG).show();
                             else
-                                System.out.println("REG===NULL");
+                                Toast.makeText(activity,"Erroreeee",Toast.LENGTH_LONG).show();
+
 
 
                         }

@@ -171,9 +171,9 @@
 
             <EditText
                 android:id="@+id/detailsTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="101dp"
+                android:layout_width="201dp"
+                android:layout_height="38dp"
+                android:layout_marginBottom="100dp"
                 android:layout_marginEnd="43dp"
                 android:layout_marginStart="43dp"
                 android:ems="10"
@@ -183,7 +183,9 @@
                 app:layout_constraintRight_toRightOf="parent"
                 tools:layout_constraintBottom_creator="1"
                 tools:layout_constraintLeft_creator="1"
-                tools:layout_constraintRight_creator="1" />
+                tools:layout_constraintRight_creator="1"
+                tools:layout_editor_absoluteX="140dp"
+                android:layout_marginRight="43dp" />
 
 
 

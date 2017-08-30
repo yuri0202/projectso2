@@ -11,6 +11,7 @@ import android.widget.EditText;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -61,6 +62,7 @@ public class test2 extends AppCompatActivity {
             }
 
         }*/
+        //Date nowDate = Calendar.getInstance().getTime();
         Date nowDate = new Date();
         DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         text2.setText(sdf.format(nowDate));

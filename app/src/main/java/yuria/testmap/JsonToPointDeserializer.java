@@ -32,8 +32,8 @@ public class JsonToPointDeserializer extends JsonDeserializer<Point> {
 
             String[] coordinates = xy.replaceFirst("POINT ?\\(", "").replaceFirst("\\)", "").split(" ");
 
-            double lon = Double.parseDouble(coordinates[0]);
-            double lat = Double.parseDouble(coordinates[1]);
+            double lat = Double.parseDouble(coordinates[0]);
+            double lon = Double.parseDouble(coordinates[1]);
 
             Point point = geometryFactory.createPoint(new Coordinate(lat, lon));
             return point;
