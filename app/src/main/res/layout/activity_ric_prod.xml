@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="yuria.testmap.RicProdActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.51">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_marginTop="-0dp">
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="53dp"
+                android:layout_height="46dp"
+                android:ems="10"
+                android:inputType="number"
+                android:text="1"
+                android:textAlignment="center"
+                tools:layout_editor_absoluteY="278dp"
+                tools:layout_editor_absoluteX="219dp" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prezzo (Euro)"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:layout_marginEnd="27dp"
+                tools:layout_editor_absoluteY="287dp"
+                tools:layout_editor_absoluteX="36dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Distanza (Km)"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:layout_marginEnd="24dp"
+                tools:layout_editor_absoluteY="353dp"
+                tools:layout_editor_absoluteX="36dp" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="112dp"
+                android:layout_height="38dp"
+                android:entries="@array/tipo"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                tools:layout_editor_absoluteY="114dp"
+                tools:layout_editor_absoluteX="122dp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:layout_marginEnd="58dp"
+                tools:layout_editor_absoluteX="245dp"
+                tools:layout_editor_absoluteY="183dp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:layout_marginStart="25dp"
+                tools:layout_editor_absoluteY="287dp"
+                tools:layout_editor_absoluteX="284dp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Da"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:layout_marginStart="7dp"
+                tools:layout_editor_absoluteY="287dp"
+                tools:layout_editor_absoluteX="170dp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Da"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                tools:layout_editor_absoluteY="183dp"
+                tools:layout_editor_absoluteX="89dp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:text="Data"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteY="183dp"
+                tools:layout_editor_absoluteX="40dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="2dp"
+                tools:layout_editor_absoluteY="120dp"
+                tools:layout_editor_absoluteX="40dp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:layout_marginStart="40dp"
+                tools:layout_editor_absoluteY="53dp"
+                tools:layout_editor_absoluteX="40dp" />
+
+            <EditText
+                android:id="@+id/dataDaTxt"
+                android:layout_width="110dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="121dp"
+                android:layout_marginStart="122dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteY="174dp"
+                tools:layout_editor_absoluteX="117dp" />
+
+            <EditText
+                android:id="@+id/nomeTxt"
+                android:layout_width="162dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="68dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:text="Nome Prodotto"
+                tools:layout_editor_absoluteY="45dp"
+                tools:layout_editor_absoluteX="122dp" />
+
+            <EditText
+                android:id="@+id/editText5"
+                android:layout_width="46dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="39dp"
+                android:layout_marginStart="39dp"
+                android:ems="10"
+                android:inputType="number"
+                android:text="200"
+                android:textAlignment="center"
+                tools:layout_editor_absoluteY="278dp"
+                tools:layout_editor_absoluteX="311dp" />
+
+            <EditText
+                android:id="@+id/editText6"
+                android:layout_width="64dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="6dp"
+                android:ems="10"
+                android:inputType="number"
+                android:text="1"
+                android:textAlignment="center"
+                tools:layout_editor_absoluteY="341dp"
+                tools:layout_editor_absoluteX="219dp" />
+
+            <Button
+                android:id="@+id/scegliDaBtn"
+                android:layout_width="84dp"
+                android:layout_height="36dp"
+                android:text="Scegli Da"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteY="210dp"
+                tools:layout_editor_absoluteX="122dp" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="85dp"
+                android:layout_height="37dp"
+                android:text="Scegli A"
+                android:textSize="12sp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="31dp"
+                tools:layout_editor_absoluteY="210dp"
+                tools:layout_editor_absoluteX="272dp" />
+
+            <EditText
+                android:id="@+id/dataATxt"
+                android:layout_width="115dp"
+                android:layout_height="29dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="253dp"
+                tools:layout_editor_absoluteY="183dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:text="Home"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/cercaBtn"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cercaBtn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="32dp" />
+
+        <Button
+            android:id="@+id/cercaBtn"
+            android:layout_width="88dp"
+            android:layout_height="48dp"
+            android:text="Cerca"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintRight_creator="1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="35dp" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name = "tipo">
+        <item>Scarpe </item>
+        <item>Vestiti</item>
+        <item>Borse e Accessori</item>
+        <item>Libri</item>
+        <item>Musica e FIlm</item>
+        <item>Casa, Giardino</item>
+        <item>Elettronica e Informatica</item>
+    </string-array>
+</resources>
