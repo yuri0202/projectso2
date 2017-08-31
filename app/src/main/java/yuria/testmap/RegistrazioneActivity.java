@@ -151,7 +151,9 @@ public class RegistrazioneActivity extends MenuActivity {
 
                             @Override
                             public void run() {
-                                if(regLista==null)
+                                //System.out.println("GRANDEZZA LISTA: "+regLista.size());
+                                //System.out.println("nome: "+regLista.get(0).getNome());
+                                if(regLista.get(0).getNome()== null)
                                     populateListView(0);
                                  else
                                      populateListView(1);
