@@ -19,20 +19,10 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp"
             tools:layout_marginTop="-0dp">
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="53dp"
-                android:layout_height="46dp"
-                android:ems="10"
-                android:inputType="number"
-                android:text="1"
-                android:textAlignment="center"
-                tools:layout_editor_absoluteY="278dp"
-                tools:layout_editor_absoluteX="219dp" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -41,9 +31,11 @@
                 android:text="Prezzo (Euro)"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
-                android:layout_marginEnd="27dp"
-                tools:layout_editor_absoluteY="287dp"
-                tools:layout_editor_absoluteX="36dp" />
+                android:layout_marginStart="36dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
+                tools:layout_constraintBaseline_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -52,19 +44,29 @@
                 android:text="Distanza (Km)"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
-                android:layout_marginEnd="24dp"
-                tools:layout_editor_absoluteY="353dp"
-                tools:layout_editor_absoluteX="36dp" />
+                android:layout_marginStart="36dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/distanzaTxt"
+                tools:layout_constraintBaseline_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/tipoSpinner"
                 android:layout_width="112dp"
                 android:layout_height="38dp"
-                android:entries="@array/tipo"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                tools:layout_editor_absoluteY="114dp"
-                tools:layout_editor_absoluteX="122dp" />
+                android:layout_marginBottom="38dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="30dp"
+                android:entries="@array/tipo2"
+                app:layout_constraintBottom_toTopOf="@+id/dataDaTxt"
+                app:layout_constraintLeft_toRightOf="@+id/textView4"
+                app:layout_constraintRight_toRightOf="@+id/textView5"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -73,9 +75,11 @@
                 android:text="A"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
-                android:layout_marginEnd="58dp"
-                tools:layout_editor_absoluteX="245dp"
-                tools:layout_editor_absoluteY="183dp" />
+                android:layout_marginStart="10dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/dataATxt"
+                tools:layout_constraintBaseline_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toRightOf="@+id/dataDaTxt" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -84,9 +88,13 @@
                 android:text="A"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
-                android:layout_marginStart="25dp"
-                tools:layout_editor_absoluteY="287dp"
-                tools:layout_editor_absoluteX="284dp" />
+                app:layout_constraintRight_toLeftOf="@+id/prezzoATxt"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toBottomOf="@+id/prezzoDaTxt"
+                android:layout_marginEnd="9dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginRight="9dp" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -95,9 +103,12 @@
                 android:text="Da"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
-                android:layout_marginStart="7dp"
-                tools:layout_editor_absoluteY="287dp"
-                tools:layout_editor_absoluteX="170dp" />
+                tools:layout_constraintTop_creator="1"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="36dp"
+                app:layout_constraintTop_toBottomOf="@+id/scegliDaBtn"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toRightOf="@+id/textView7" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -106,21 +117,25 @@
                 android:text="Da"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="28dp"
-                tools:layout_editor_absoluteY="183dp"
-                tools:layout_editor_absoluteX="89dp" />
+                android:layout_marginStart="11dp"
+                tools:layout_constraintTop_creator="1"
+                android:layout_marginTop="7dp"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintTop_toTopOf="@+id/dataDaTxt"
+                app:layout_constraintLeft_toRightOf="@+id/textView8" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="44dp"
+                android:layout_marginStart="36dp"
                 android:text="Data"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
-                tools:layout_editor_absoluteY="183dp"
-                tools:layout_editor_absoluteX="40dp" />
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
+                tools:layout_constraintBaseline_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -129,100 +144,128 @@
                 android:text="Tipo"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="2dp"
-                tools:layout_editor_absoluteY="120dp"
-                tools:layout_editor_absoluteX="40dp" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nome"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="18sp"
-                android:layout_marginStart="40dp"
-                tools:layout_editor_absoluteY="53dp"
-                tools:layout_editor_absoluteX="40dp" />
+                android:layout_marginStart="36dp"
+                tools:layout_constraintTop_creator="1"
+                android:layout_marginTop="37dp"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/dataDaTxt"
-                android:layout_width="110dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="121dp"
-                android:layout_marginStart="122dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                tools:layout_editor_absoluteY="174dp"
-                tools:layout_editor_absoluteX="117dp" />
-
-            <EditText
-                android:id="@+id/nomeTxt"
-                android:layout_width="162dp"
+                android:layout_width="107dp"
                 android:layout_height="44dp"
-                android:layout_marginEnd="68dp"
+                android:layout_marginEnd="51dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="47dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                tools:text="Nome Prodotto"
-                tools:layout_editor_absoluteY="45dp"
-                tools:layout_editor_absoluteX="122dp" />
+                android:textSize="16sp"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintLeft_toRightOf="@+id/textView4"
+                app:layout_constraintRight_toLeftOf="@+id/scegliABtn"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1"
+                tools:layout_editor_absoluteY="98dp" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/dataATxt"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/dataDaTxt"
+                app:layout_constraintLeft_toLeftOf="@+id/textView5"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/dataDaTxt"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1" />
+
+            <EditText
+                android:id="@+id/prezzoDaTxt"
                 android:layout_width="46dp"
                 android:layout_height="0dp"
-                android:layout_marginEnd="39dp"
-                android:layout_marginStart="39dp"
+                android:layout_marginEnd="29dp"
+                android:layout_marginStart="31dp"
                 android:ems="10"
                 android:inputType="number"
-                android:text="200"
                 android:textAlignment="center"
-                tools:layout_editor_absoluteY="278dp"
-                tools:layout_editor_absoluteX="311dp" />
+                app:layout_constraintRight_toLeftOf="@+id/textView13"
+                tools:layout_constraintRight_creator="1"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
+                tools:layout_constraintBaseline_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/textView9"
+                app:layout_constraintHorizontal_bias="0.409" />
 
             <EditText
-                android:id="@+id/editText6"
-                android:layout_width="64dp"
-                android:layout_height="42dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginStart="6dp"
+                android:id="@+id/prezzoATxt"
+                android:layout_width="46dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="33dp"
+                android:layout_marginStart="34dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textAlignment="center"
+                tools:layout_constraintRight_creator="1"
+                app:layout_constraintRight_toRightOf="@+id/scegliABtn"
+                tools:layout_constraintBaseline_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/dataATxt"
+                app:layout_constraintHorizontal_bias="0.507"
+                android:layout_marginTop="28dp"
+                app:layout_constraintTop_toBottomOf="@+id/scegliABtn" />
+
+            <EditText
+                android:id="@+id/distanzaTxt"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
                 android:ems="10"
                 android:inputType="number"
                 android:text="1"
                 android:textAlignment="center"
-                tools:layout_editor_absoluteY="341dp"
-                tools:layout_editor_absoluteX="219dp" />
+                tools:layout_constraintTop_creator="1"
+                tools:layout_constraintRight_creator="1"
+                app:layout_constraintRight_toRightOf="@+id/prezzoDaTxt"
+                android:layout_marginTop="34dp"
+                app:layout_constraintTop_toBottomOf="@+id/prezzoDaTxt"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toRightOf="@+id/textView9"
+                app:layout_constraintHorizontal_bias="1.0" />
 
             <Button
                 android:id="@+id/scegliDaBtn"
-                android:layout_width="84dp"
-                android:layout_height="36dp"
+                android:layout_width="88dp"
+                android:layout_height="48dp"
                 android:text="Scegli Da"
                 android:textSize="12sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                tools:layout_editor_absoluteY="210dp"
-                tools:layout_editor_absoluteX="122dp" />
+                android:layout_marginEnd="9dp"
+                tools:layout_constraintTop_creator="1"
+                tools:layout_constraintRight_creator="1"
+                app:layout_constraintRight_toRightOf="@+id/dataDaTxt"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/dataDaTxt"
+                android:layout_marginRight="12dp" />
 
             <Button
-                android:id="@+id/button3"
-                android:layout_width="85dp"
-                android:layout_height="37dp"
+                android:id="@+id/scegliABtn"
+                android:layout_width="88dp"
+                android:layout_height="48dp"
                 android:text="Scegli A"
                 android:textSize="12sp"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="31dp"
-                tools:layout_editor_absoluteY="210dp"
-                tools:layout_editor_absoluteX="272dp" />
-
-            <EditText
-                android:id="@+id/dataATxt"
-                android:layout_width="115dp"
-                android:layout_height="29dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                tools:layout_editor_absoluteX="253dp"
-                tools:layout_editor_absoluteY="183dp" />
+                android:layout_marginEnd="13dp"
+                tools:layout_constraintTop_creator="1"
+                tools:layout_constraintRight_creator="1"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/dataATxt" />
 
         </android.support.constraint.ConstraintLayout>
 
