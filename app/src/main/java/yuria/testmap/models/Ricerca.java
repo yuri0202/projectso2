@@ -1,9 +1,12 @@
 package yuria.testmap.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Point;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import yuria.testmap.PointToJsonSerializer;
 
 /**
  * Created by yuria on 30/08/2017.
@@ -16,7 +19,7 @@ public class Ricerca implements Serializable {
     private Float prezzoDa;
     private Float prezzoA;
     private Float distanza;
-    //Serializer?
+    @JsonSerialize(using = PointToJsonSerializer.class)
     private Point pos;
 
     public Ricerca (){}

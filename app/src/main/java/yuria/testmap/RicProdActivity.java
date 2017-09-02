@@ -11,8 +11,6 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,14 +36,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
 
 import yuria.testmap.models.Registrazione;
@@ -60,7 +55,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
 
 
     final Activity activity = this;
-    List<Registrazione> regLista = null;
+    ArrayList<Registrazione> regLista = null;
     RestTemplate restTemplate = new RestTemplate();
     //final int idutentefinal = MenuActivity.utente.getIdutente();
     private List<MediaType> acceptableMediaTypes = asList(MediaType.APPLICATION_JSON);
@@ -122,7 +117,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
         tipoSpinner = (Spinner) findViewById(R.id.tipoSpinner);
 
         cercaBtn = (Button) findViewById(R.id.cercaBtn);
-        homeBtn = (Button) findViewById(R.id.homeBtn);
+        homeBtn = (Button) findViewById(R.id.homeRicBtn);
         scegliDaBtn = (Button) findViewById(R.id.scegliDaBtn);
         scegliABtn=(Button) findViewById(R.id.scegliABtn);
 
@@ -170,16 +165,22 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                 String tipo = null;
                 Date dataDa = null;
                 Date dataA = null;
-                Float prezzoDa;
-                Float prezzoA;
-                Float distanza;
+                Float prezzoDa = null;
+                Float prezzoA = null;
+                Float distanza = null;
                 Point pos;
                 if (!tipoSpinner.getSelectedItem().toString().equals("Tutti"))
                     tipo=tipoSpinner.getSelectedItem().toString();
                 if (!dataDaTxt.getText().toString().equals(""))
                     dataDa = startCurrent.getTime();
                 if (!dataATxt.getText().toString().equals(""))
-                    dataA = startCurrent.getTime();
+                    dataA = endCurrent.getTime();
+                if (!prezzoDaTxt.getText().toString().equals(""))
+                    prezzoDa=Float.parseFloat(prezzoDaTxt.getText().toString());
+                if (!prezzoATxt.getText().toString().equals(""))
+                    prezzoA=Float.parseFloat(prezzoATxt.getText().toString());
+                if (!distanzaTxt.getText().toString().equals(""))
+                    distanza=Float.parseFloat(distanzaTxt.getText().toString());
 
 
                 if (ActivityCompat.checkSelfPermission(RicProdActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -198,6 +199,8 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                     Toast.makeText(RicProdActivity.this,"Attiva GPS",Toast.LENGTH_LONG).show();
                     return;
                 }
+
+                new RicProdActivity.validateHttpRequest(tipo,dataDa,dataA,prezzoDa,prezzoA,distanza,pos).execute();
 
 
                 //Request http validate blabla
@@ -394,16 +397,16 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
         protected Void doInBackground(Void... params) {
 
             //Crea oggetto ricerca con i dati passati
-            Ricerca ric = new Ricerca();
+            Ricerca ric = new Ricerca(tipo,dataDa,dataA,prezzoDa,prezzoA,distanza,pos);
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
             HttpEntity<Ricerca> entity = new HttpEntity<>(ric, headers);
             try {
-                //final Utente finalUtente;
-                List<Registrazione> regs = new ArrayList<>();
 
-                regs= Arrays.asList(restTemplate.exchange("https://whispering-lake-91455.herokuapp.com/search?", HttpMethod.POST, entity, Registrazione[].class).getBody());
-                regLista=regs;
+
+                List<Registrazione> regs=  Arrays.asList(restTemplate.exchange("https://whispering-lake-91455.herokuapp.com/search_reg", HttpMethod.POST, entity, Registrazione[].class).getBody());
+
+                regLista= new ArrayList<Registrazione>(regs);
 
 
                 new Thread() {
@@ -414,6 +417,16 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                             public void run() {
 
                                 //apri activity risultatoRicerca passando regLista.
+                                if(regLista== null)
+                                    System.out.println("NESSUNA REGISTRAZIONE TROVATA");
+                                else
+                                {
+                                    System.out.println(regLista.size());
+
+                                }
+                                Intent int1 = new Intent(RicProdActivity.this, RisultatoRicerca.class);
+                                int1.putExtra("reg", regLista);
+                                startActivity(int1);
 
 
                             }

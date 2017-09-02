@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -65,7 +64,7 @@ public class DescAcquistoActivity extends MenuActivity {
 
     private void initWidgets() {
 
-        OkBtn = (Button) findViewById(R.id.indietroBtn);
+        OkBtn = (Button) findViewById(R.id.indietroRicBtn);
         OkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

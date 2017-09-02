@@ -3,24 +3,17 @@ package yuria.testmap;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,10 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import yuria.testmap.models.Registrazione;
-import yuria.testmap.models.Utente;
 
 import static java.util.Arrays.asList;
-import static yuria.testmap.R.id.a;
 
 public class RegistrazioneActivity extends MenuActivity {
     Button indietroBtn;
@@ -66,7 +57,7 @@ public class RegistrazioneActivity extends MenuActivity {
     }
 
     private void initWidgets() {
-        indietroBtn = (Button) findViewById(R.id.indietroBtn);
+        indietroBtn = (Button) findViewById(R.id.indietroRicBtn);
         itemList = (ListView) findViewById(R.id.itemList);
 
         indietroBtn.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +148,7 @@ public class RegistrazioneActivity extends MenuActivity {
                                     populateListView(0);
                                  else
                                      populateListView(1);
+
 
                             }
                         });

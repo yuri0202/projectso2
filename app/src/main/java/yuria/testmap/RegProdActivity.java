@@ -33,13 +33,11 @@ import com.vividsolutions.jts.geom.PrecisionModel;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -103,7 +101,7 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
     }
 
     private void initWidget() {
-        IndietroBtn = (Button) findViewById(R.id.indietroBtn);
+        IndietroBtn = (Button) findViewById(R.id.indietroRicBtn);
         posBtn = (Button) findViewById(R.id.positionBtn);
         registraBtn = (Button) findViewById(R.id.RegistraBtn);
         detailsTxt = (EditText) findViewById(R.id.detailsTxt);
