@@ -13,7 +13,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="7dp"
         android:text="Password"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp"
@@ -23,7 +23,7 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintHorizontal_bias="0.28" />
+        app:layout_constraintHorizontal_bias="0.267" />
 
     <TextView
         android:id="@+id/textView12"
@@ -39,13 +39,13 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.28" />
+        app:layout_constraintHorizontal_bias="0.26" />
 
     <EditText
         android:id="@+id/usernameTxt"
         android:layout_width="228dp"
         android:layout_height="47dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -53,8 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView12"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.506" />
+        tools:layout_constraintTop_creator="1" />
 
     <Button
         android:id="@+id/okBtn"
