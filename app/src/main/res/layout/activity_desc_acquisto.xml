@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,21 +9,49 @@
     tools:context="yuria.testmap.DescAcquistoActivity">
 
 
+    <Button
+        android:id="@+id/indietroRicBtn"
+        android:layout_width="0dp"
+        android:layout_height="67dp"
+
+        android:layout_gravity="center"
+
+        android:layout_weight="0.59"
+        android:background="@color/colorPLight"
+        android:text="INDIETRO"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="452dp">
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.91"
+        android:clipToPadding="true"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/indietroRicBtn">
 
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            tools:layout_marginTop ="-100dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_marginTop="0dp">
 
             <TextView
                 android:id="@+id/posTxt"
                 android:layout_width="216dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="51dp"
+                android:layout_marginStart="51dp"
                 android:layout_marginTop="37dp"
                 android:text="Coordinate o via?"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
@@ -37,16 +65,16 @@
                 android:id="@+id/dataTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="35dp"
                 android:text="18/08/2017"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
+                app:layout_constraintLeft_toLeftOf="@+id/prezzoTxt"
                 app:layout_constraintTop_toBottomOf="@+id/prezzoTxt"
                 tools:layout_constraintLeft_creator="1"
-                tools:layout_constraintTop_creator="1"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintLeft_toLeftOf="@+id/prezzoTxt" />
+                tools:layout_constraintTop_creator="1" />
 
             <TextView
                 android:id="@+id/tipoTxt"
@@ -56,14 +84,13 @@
                 android:text="Abbigliamento"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="@+id/nomeTxt"
                 app:layout_constraintRight_toRightOf="@+id/nomeTxt"
                 app:layout_constraintTop_toBottomOf="@+id/nomeTxt"
                 tools:layout_constraintLeft_creator="1"
                 tools:layout_constraintRight_creator="1"
-                tools:layout_constraintTop_creator="1"
-                android:layout_marginLeft="0dp"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="@+id/nomeTxt" />
+                tools:layout_constraintTop_creator="1" />
 
             <TextView
                 android:id="@+id/nomeTxt"
@@ -82,35 +109,33 @@
                 android:id="@+id/dettagliTxt"
                 android:layout_width="216dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginTop="32dp"
-                android:text="scrivo tanti dettagli scrivo tanti dettagli scrivo tanti dettagli scrivo tanti dettagli scrivo tanti dettagli scrivo tanti dettagli scrivo tanti dettagli scrivo tanti dettagli scrivo tanti dettagli"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/posTxt"
                 app:layout_constraintTop_toBottomOf="@+id/posTxt"
-                tools:layout_constraintBottom_creator="1"
-                tools:layout_constraintRight_creator="1"
-                tools:layout_constraintTop_creator="1"
-                android:layout_marginLeft="0dp"
-                app:layout_constraintLeft_toLeftOf="@+id/posTxt" />
+                tools:layout_constraintTop_creator="1" />
 
             <TextView
                 android:id="@+id/textView31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:text="Dettagli"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/dettagliTxt"
                 app:layout_constraintTop_toBottomOf="@+id/posTxt"
                 tools:layout_constraintLeft_creator="1"
-                tools:layout_constraintTop_creator="1"
-                android:layout_marginLeft="16dp"
-                app:layout_constraintRight_toLeftOf="@+id/dettagliTxt"
-                android:layout_marginRight="8dp"
-                app:layout_constraintHorizontal_bias="0.0" />
+                tools:layout_constraintTop_creator="1" />
 
             <TextView
                 android:id="@+id/a"
@@ -230,14 +255,4 @@
     </ScrollView>
 
 
-    <Button
-        android:id="@+id/indietroRicBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_gravity="center"
-
-        android:text="Ok" />
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

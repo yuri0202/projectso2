@@ -37,7 +37,7 @@ public class RisultatoRicerca extends MenuActivity {
     }
     private void initWidgets() {
         itemList = (ListView) findViewById(R.id.risRicercaList);
-        homeBtn = (Button) findViewById(R.id.homeRicBtn);
+       // homeBtn = (Button) findViewById(R.id.homeRicBtn);
         indietroBtn = (Button) findViewById(R.id.indietroRicBtn);
 
         indietroBtn.setOnClickListener(new View.OnClickListener() {
@@ -50,12 +50,6 @@ public class RisultatoRicerca extends MenuActivity {
             }
         });
 
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RisultatoRicerca.this,HomeActivity.class));
-            }
-        });
 
         Bundle bun = getIntent().getExtras();
         regLista = (ArrayList<Registrazione>) bun.get("reg");

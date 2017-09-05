@@ -1,80 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<LinearLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardBackgroundColor="#d14836"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardElevation="15dp"
-    tools:contentPaddingLeft="30dp">
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="4dp"
+    android:background="@color/backGround"
 
-    <RelativeLayout
+>
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="206dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-        <TextView
-            android:id="@+id/cardText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/cardText2"
-            android:layout_alignStart="@+id/cardText2"
-            android:layout_marginBottom="20dp"
-            android:text="Nome: blablabla"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/cardText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/cardText3"
-            android:layout_alignStart="@+id/cardText3"
-            android:layout_marginBottom="20dp"
-            android:text="Tipologia: blablabla"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/cardText3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/cardDettagliBtn"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginStart="17dp"
-            android:text="Prezzo: blablabla"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/cardMapBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:layout_marginBottom="14dp"
-            android:layout_marginEnd="44dp"
-            android:text="MAPPA" />
-
-        <Button
-            android:id="@+id/cardDettagliBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/cardMapBtn"
-            android:layout_alignBottom="@+id/cardMapBtn"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:layout_marginStart="44dp"
-            android:text="DETTAGLI" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        card_view:cardBackgroundColor="#969696"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="15dp"
+        card_view:layout_constraintHorizontal_bias="0.0"
+        card_view:layout_constraintLeft_toLeftOf="parent"
+        card_view:layout_constraintRight_toRightOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="21dp">
 
 
-    </RelativeLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="174dp"
+            android:paddingBottom="-20dp"
+            android:paddingLeft="0dp"
+            android:paddingTop="-20dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:id="@+id/cardText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/cardText2"
+                android:layout_alignStart="@+id/cardText2"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Nome: blablabla"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cardText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/cardText3"
+                android:layout_alignStart="@+id/cardText3"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="16dp"
+                android:text="Tipologia: blablabla"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                card_view:layout_constraintLeft_toLeftOf="@+id/cardText1"
+                card_view:layout_constraintTop_toBottomOf="@+id/cardText1" />
+
+            <TextView
+                android:id="@+id/cardText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/cardDettagliBtn"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="16dp"
+                android:text="Prezzo: blablabla"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/cardText2" />
+
+            <Button
+                android:id="@+id/cardDettagliBtn"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:background="@color/colorPLight"
+                android:text="DETTAGLI"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.0"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintRight_toLeftOf="@+id/cardMapBtn"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintLeft_creator="1" />
+
+            <Button
+                android:id="@+id/cardMapBtn"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_weight="0.5"
+                android:background="@color/colorPLight"
+                android:text="MAPPA"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintLeft_toRightOf="@+id/cardDettagliBtn"
+                card_view:layout_constraintRight_toRightOf="parent"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintRight_creator="1" />
 
 
-</android.support.v7.widget.CardView>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
