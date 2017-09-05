@@ -15,10 +15,10 @@
         android:id="@+id/map"
         tools:context="yuria.testmap.MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_above="@+id/testBtn" />
+        android:layout_above="@+id/routeButton" />
 
     <Button
-        android:id="@+id/testBtn"
+        android:id="@+id/routeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"

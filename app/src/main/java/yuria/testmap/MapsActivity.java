@@ -1,12 +1,14 @@
 package yuria.testmap;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -38,6 +40,7 @@ import com.vividsolutions.jts.geom.PrecisionModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import yuria.testmap.models.Registrazione;
 
@@ -46,7 +49,7 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
     private GoogleMap mMap;
     Registrazione regCurr = null;
 
-    Button testBtn;
+    Button routeButton;
     Point actualPos;
 
     Location mLastLocation = null;
@@ -98,7 +101,33 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
         Bundle bun = getIntent().getExtras();
         regCurr = (Registrazione) bun.get("reg");
 
+        routeButton = (Button)  findViewById(R.id.routeButton);
+        routeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f", regCurr.getPos().getX(), regCurr.getPos().getY());
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                try
+                {
+                    startActivity(intent);
+                }
+                catch(ActivityNotFoundException ex)
+                {
+                    try
+                    {
+                        Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        startActivity(unrestrictedIntent);
+                    }
+                    catch(ActivityNotFoundException innerEx)
+                    {
+                      //  Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
+                    }
+                }
 
+
+            }
+        });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -150,20 +179,6 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
         });*/
     }
 
-    private void init() {
-        testBtn = (Button)  findViewById(R.id.testBtn);
-        testBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-            }
-        });
-
-
-
-    }
 
     private void getCurrPosition() {
         if (ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -187,20 +202,6 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
         setMarkers();
 
     }
-    private void addMarker() {
-
-        LatLng second = new LatLng(actualPos.getX(),actualPos.getY());
-        float zoomLevel = (float) 14.0;
-
-
-        //builder.include(second);
-        //LatLngBounds bounds = builder.build();
-        // int padding = 0;
-        //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,padding);
-        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(second, zoomLevel);
-        mMap.animateCamera(yourLocation);
-    }
-
 
     /**
      * Manipulates the map once available.
