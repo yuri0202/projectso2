@@ -63,6 +63,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
         setAccept(acceptableMediaTypes);
     }};
 
+    Point pos;
     private Calendar startDate,endDate;
     private Calendar startCurrent = null, endCurrent = null;
     Location mLastLocation = null;
@@ -168,7 +169,6 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                 Float prezzoDa = null;
                 Float prezzoA = null;
                 Float distanza = null;
-                Point pos;
                 if (!tipoSpinner.getSelectedItem().toString().equals("Tutti"))
                     tipo=tipoSpinner.getSelectedItem().toString();
                 if (!dataDaTxt.getText().toString().equals(""))
@@ -211,11 +211,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
 
         homeBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
-               // startActivity(new Intent(RicProdActivity.this, HomeActivity.class));
-                if(startCurrent!=null)
-                  Toast.makeText(RicProdActivity.this,"Start: "+sdf.format(startCurrent.getTime()),Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(RicProdActivity.this,"START IS NULL",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(RicProdActivity.this, HomeActivity.class));
 
             }
         });
@@ -426,6 +422,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                                 }
                                 Intent int1 = new Intent(RicProdActivity.this, RisultatoRicerca.class);
                                 int1.putExtra("reg", regLista);
+
                                 startActivity(int1);
 
 

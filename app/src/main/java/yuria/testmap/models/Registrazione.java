@@ -4,16 +4,13 @@ package yuria.testmap.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.io.ParseException;
-import com.vividsolutions.jts.io.WKBReader;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import yuria.testmap.JsonToPointDeserializer;
-import yuria.testmap.PointToJsonSerializer;
+import yuria.testmap.serializers.JsonToPointDeserializer;
+import yuria.testmap.serializers.PointToJsonSerializer;
 
 /**
  * Created by yuria on 22/08/2017.

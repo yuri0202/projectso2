@@ -70,10 +70,10 @@ public class DescAcquistoActivity extends MenuActivity {
             public void onClick(View v) {
                 Bundle bun1 = getIntent().getExtras();
                 String extra = bun1.getString("activity");
-                if (extra.equals("map"))
-                    startActivity(new Intent(DescAcquistoActivity.this,MapsActivity.class));
+                if (extra.equals("ricerca"))
+                    onBackPressed();
                 else if(extra.equals("registrazione"))
-                    startActivity(new Intent(DescAcquistoActivity.this,RegistrazioneActivity.class));
+                    onBackPressed();
                 previousActivity=extra;
 
             }

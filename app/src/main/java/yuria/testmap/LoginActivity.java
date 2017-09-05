@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new LoginActivity.validateHttpRequest( ((EditText)findViewById(R.id.usernameTxt)).getText().toString(),
                         ((EditText)findViewById(R.id.passwordTxt)).getText().toString()).execute();
-                //startActivity(new Intent(LoginActivity.this, HomeActivity.class)); //TODO CANCELLARE METTERLO SOTTO
+
             }
         });
     }

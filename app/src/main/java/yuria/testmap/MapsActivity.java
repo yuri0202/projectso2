@@ -1,30 +1,204 @@
 package yuria.testmap;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.PrecisionModel;
 
-public class MapsActivity extends MenuActivity implements OnMapReadyCallback {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import yuria.testmap.models.Registrazione;
+
+public class MapsActivity extends MenuActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener{
 
     private GoogleMap mMap;
+    Registrazione regCurr = null;
+
+    Button testBtn;
+    Point actualPos;
+
+    Location mLastLocation = null;
+    GoogleApiClient mGoogleApiClient = null;
+    private static final int MY_PERMISSION_REQUEST_CODE = 7171;
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 7172;
+    double longitude = 0, latitude = 0;
+    private Location mLocation;
+    private LocationRequest mLocationRequest;
+    private boolean mRequestingLocationUpdates = true;
+    private static final String TAG = "debug";
+    private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
+
+
+    private static int UPDATE_INTERVAL = 0; // SEC
+    private static int FATEST_INTERVAL = 0; // SEC
+    private static int DISPLACEMENT = 10; // METERS
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (checkPlayServices())
+                        buildGoogleApiClient();
+                    createLocationRequest();
+                }
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //Run-time request permission
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            }, MY_PERMISSION_REQUEST_CODE);
+        } else {
+            if (checkPlayServices()) {
+                buildGoogleApiClient();
+                createLocationRequest();
+            }
+        }
+        Bundle bun = getIntent().getExtras();
+        regCurr = (Registrazione) bun.get("reg");
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+
+       // setMarkers();
+
+
+    }
+
+    private void setMarkers() {
+
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+       /* if (actualPos!=null) {
+            LatLng first = new LatLng(actualPos.getX(), actualPos.getY());
+            mMap.addMarker(new MarkerOptions().position(first).title("Sei qui"));
+            builder.include(first);
+        }*/
+
+        LatLng first = new LatLng(actualPos.getX(), actualPos.getY());
+        mMap.addMarker(new MarkerOptions().position(first).title("Sei qui")).showInfoWindow();
+        builder.include(first);
+
+        LatLng second = new LatLng(regCurr.getPos().getX(),regCurr.getPos().getY());
+        mMap.addMarker(new MarkerOptions().position(second).title("Acquisto: "+regCurr.getNome())).showInfoWindow();
+        float zoomLevel = (float) 14.0;
+
+
+        builder.include(second);
+        LatLngBounds bounds = builder.build();
+        int padding = (int) (getResources().getDisplayMetrics().heightPixels * 0.20);
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,padding);
+        //CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(second, zoomLevel);
+        mMap.animateCamera(cu);
+        //mMap.moveCamera( CameraUpdateFactory.newLatLng(second));
+       /* mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                //Toast.makeText(MapsActivity.this, "Hai cliccato sul marker", Toast.LENGTH_SHORT).show();
+                Intent int1 = new Intent(MapsActivity.this, DescAcquistoActivity.class);
+                int1.putExtra("activity","map");
+                startActivity(int1);
+                return true;
+            }
+        });*/
+    }
+
+    private void init() {
+        testBtn = (Button)  findViewById(R.id.testBtn);
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });
+
+
+
+    }
+
+    private void getCurrPosition() {
+        if (ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            System.out.println("NON ENTRA");
+            return;
+        }
+
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+
+        if (mLastLocation != null) {
+            latitude = mLastLocation.getLatitude();
+            longitude = mLastLocation.getLongitude();
+            System.out.println("ENTRA");
+            actualPos =  geometryFactory.createPoint(new Coordinate(latitude, longitude));
+        }else{
+            Toast.makeText(MapsActivity.this,"Attiva GPS",Toast.LENGTH_LONG).show();
+            return;
+        }
+        setMarkers();
+
+    }
+    private void addMarker() {
+
+        LatLng second = new LatLng(actualPos.getX(),actualPos.getY());
+        float zoomLevel = (float) 14.0;
+
+
+        //builder.include(second);
+        //LatLngBounds bounds = builder.build();
+        // int padding = 0;
+        //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,padding);
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(second, zoomLevel);
+        mMap.animateCamera(yourLocation);
     }
 
 
@@ -39,22 +213,104 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng caserta = new LatLng(41.078042, 14.347528);
-        mMap.addMarker(new MarkerOptions().position(caserta).title("Caserta, Via Laviano 26"));
-        float zoomLevel = (float) 14.0;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(caserta,zoomLevel));
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                //Toast.makeText(MapsActivity.this, "Hai cliccato sul marker", Toast.LENGTH_SHORT).show();
-                Intent int1 = new Intent(MapsActivity.this, DescAcquistoActivity.class);
-                int1.putExtra("activity","map");
-                startActivity(int1);
-                return true;
-            }
-        });
+       // init();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPlayServices();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mGoogleApiClient != null)
+            mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
+        if(mGoogleApiClient != null)
+            mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+    private void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+
+    }
+
+    private synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+
+        //Fix first time run app if permission doesn't grant yet so can't get anything
+        mGoogleApiClient.connect();
+
+
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "This device is not supported", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private void startLocationUpdates() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    private void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        //displayLocation();
+            getCurrPosition();
+            startLocationUpdates();
+    }
+
+
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mLastLocation = location;
+        //displayLocation();
+    }
+
+
 }

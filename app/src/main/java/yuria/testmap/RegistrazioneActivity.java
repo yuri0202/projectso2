@@ -83,7 +83,7 @@ public class RegistrazioneActivity extends MenuActivity {
             HashMap<Integer, Registrazione> tempMap = new HashMap<>();
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             for (Registrazione r : regLista) {
-                myItems[i] = "  " + r.getNome() + ", " + r.getTipo() + " - " + df.format(r.getData());
+                myItems[i] = r.getNome() + ", " + r.getTipo() + " - " + df.format(r.getData());
                 tempMap.put(i, r);
                 i++;
 

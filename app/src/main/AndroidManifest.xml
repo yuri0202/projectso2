@@ -36,12 +36,9 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".RegistrazioneActivity" />
-        <activity android:name=".RicProdActivity">
-
-        </activity>
+        <activity android:name=".RicProdActivity" />
         <activity android:name=".RegProdActivity" />
         <activity android:name=".DescAcquistoActivity" />
-        <activity android:name=".test" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,8 +46,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".test2"></activity>
-        <activity android:name=".RisultatoRicerca"></activity>
+        <activity android:name=".RisultatoRicerca" />
+        <activity android:name=".test" />
     </application>
 
 </manifest>

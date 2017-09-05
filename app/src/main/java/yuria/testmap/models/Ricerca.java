@@ -6,7 +6,7 @@ import com.vividsolutions.jts.geom.Point;
 import java.io.Serializable;
 import java.util.Date;
 
-import yuria.testmap.PointToJsonSerializer;
+import yuria.testmap.serializers.PointToJsonSerializer;
 
 /**
  * Created by yuria on 30/08/2017.

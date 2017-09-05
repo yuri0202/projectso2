@@ -1,5 +1,6 @@
 package yuria.testmap;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import yuria.testmap.ListViewAdapters.RegAdapter;
 import yuria.testmap.models.Registrazione;
 
 public class RisultatoRicerca extends MenuActivity {
@@ -29,6 +31,10 @@ public class RisultatoRicerca extends MenuActivity {
         initWidgets();
     }
 
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+    }
     private void initWidgets() {
         itemList = (ListView) findViewById(R.id.risRicercaList);
         homeBtn = (Button) findViewById(R.id.homeRicBtn);
@@ -37,7 +43,9 @@ public class RisultatoRicerca extends MenuActivity {
         indietroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RisultatoRicerca.this,RicProdActivity.class));
+                //startActivity(new Intent(RisultatoRicerca.this,RicProdActivity.class));
+                onBackPressed();
+
 
             }
         });
@@ -61,20 +69,22 @@ public class RisultatoRicerca extends MenuActivity {
     private void populateListView(int code) {
 
         //code == 1, user has atleast 1 registration, 0 otherwise
-        String[] myItems;
+
+
         if(code==1) {
-            myItems = new String[regLista.size()];
+            ArrayList<Registrazione> reg = new ArrayList<>();
             int i = 0;
             HashMap<Integer, Registrazione> tempMap = new HashMap<>();
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             for (Registrazione r : regLista) {
-                myItems[i] = "  " + r.getNome() + ", " + r.getTipo() + " - " + df.format(r.getData());
+                reg.add(r);
                 tempMap.put(i, r);
                 i++;
 
             }
             regMap = tempMap;
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.the_items, R.id.textViewItem, myItems);
+            RegAdapter adapter = new RegAdapter(this,reg);
+
             itemList.setAdapter(adapter);
 
             itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,9 +99,9 @@ public class RisultatoRicerca extends MenuActivity {
             });
         }
         else{ //no registrations
-            myItems= new String[1];
-            myItems[0] = "La ricerca non ha prodotto alcun risultato";
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.the_items, R.id.textViewItem, myItems);
+           String [] myItems1= new String[1];
+            myItems1[0] = "La ricerca non ha prodotto alcun risultato";
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.the_items, R.id.textViewItem, myItems1);
             itemList.setAdapter(adapter);
 
         }
