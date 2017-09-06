@@ -200,7 +200,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                     return;
                 }
 
-                new RicProdActivity.validateHttpRequest(tipo,dataDa,dataA,prezzoDa,prezzoA,distanza,pos).execute();
+                new RicProdActivity.validateHttpRequest(tipo,dataDa,dataA,prezzoDa,prezzoA,distanza,pos,MenuActivity.utente.getIdutente()).execute();
 
 
                 //Request http validate blabla
@@ -378,8 +378,9 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
         Float prezzoA;
         Float distanza;
         Point pos;
+        int idutente;
 
-        public validateHttpRequest(String tipo, Date dataDa, Date dataA, Float prezzoDa, Float prezzoA, Float distanza, Point pos) {
+        public validateHttpRequest(String tipo, Date dataDa, Date dataA, Float prezzoDa, Float prezzoA, Float distanza, Point pos, int idutente) {
             this.tipo = tipo;
             this.dataDa = dataDa;
             this.dataA = dataA;
@@ -387,13 +388,14 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
             this.prezzoA = prezzoA;
             this.distanza = distanza;
             this.pos = pos;
+            this.idutente=idutente;
         }
 
         @Override
         protected Void doInBackground(Void... params) {
 
             //Crea oggetto ricerca con i dati passati
-            Ricerca ric = new Ricerca(tipo,dataDa,dataA,prezzoDa,prezzoA,distanza,pos);
+            Ricerca ric = new Ricerca(tipo,dataDa,dataA,prezzoDa,prezzoA,distanza,pos,idutente);
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
             HttpEntity<Ricerca> entity = new HttpEntity<>(ric, headers);

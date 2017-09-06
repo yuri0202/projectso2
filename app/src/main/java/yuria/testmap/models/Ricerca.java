@@ -21,10 +21,11 @@ public class Ricerca implements Serializable {
     private Float distanza;
     @JsonSerialize(using = PointToJsonSerializer.class)
     private Point pos;
+    private int idutente;
 
     public Ricerca (){}
 
-    public Ricerca(String tipo, Date dataDa, Date dataA, Float prezzoDa, Float prezzoA, Float distanza, Point pos) {
+    public Ricerca(String tipo, Date dataDa, Date dataA, Float prezzoDa, Float prezzoA, Float distanza, Point pos, int idutente) {
         this.tipo = tipo;
         this.dataDa = dataDa;
         this.dataA = dataA;
@@ -32,6 +33,15 @@ public class Ricerca implements Serializable {
         this.prezzoA = prezzoA;
         this.distanza = distanza;
         this.pos = pos;
+        this.idutente=idutente;
+    }
+
+    public int getIdutente() {
+        return idutente;
+    }
+
+    public void setIdutente(int idutente) {
+        this.idutente = idutente;
     }
 
     public String getTipo() {
