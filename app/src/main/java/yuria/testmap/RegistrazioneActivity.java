@@ -17,13 +17,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import yuria.testmap.ListViewAdapters.RegAdapterCardListaReg;
 import yuria.testmap.models.Registrazione;
 
 import static java.util.Arrays.asList;
@@ -75,37 +74,39 @@ public class RegistrazioneActivity extends MenuActivity {
 
     private void populateListView(int code) {
 
-       //code == 1, user has atleast 1 registration, 0 otherwise
-        String[] myItems;
+        //code == 1, user has atleast 1 registration, 0 otherwise
+
+
         if(code==1) {
-            myItems = new String[regLista.size()];
+            ArrayList<Registrazione> reg = new ArrayList<>();
             int i = 0;
             HashMap<Integer, Registrazione> tempMap = new HashMap<>();
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             for (Registrazione r : regLista) {
-                myItems[i] = r.getNome() + ", " + r.getTipo() + " - " + df.format(r.getData());
+                reg.add(r);
                 tempMap.put(i, r);
                 i++;
 
             }
             regMap = tempMap;
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.the_items, R.id.textViewItem, myItems);
+            RegAdapterCardListaReg adapter = new RegAdapterCardListaReg(this,reg);
+
             itemList.setAdapter(adapter);
 
             itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    /*
                     Intent int1 = new Intent(RegistrazioneActivity.this, DescAcquistoActivity.class);
                     int1.putExtra("activity", "registrazione");
                     int1.putExtra("reg", regMap.get(position));
-                    startActivity(int1);
+                    startActivity(int1);*/
                 }
             });
         }
         else{ //no registrations
-            myItems= new String[1];
-            myItems[0] = "Non hai effettuato nessuna registrazione";
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.the_items, R.id.textViewItem, myItems);
+            String [] myItems1= new String[1];
+            myItems1[0] = "Non hai effettuato nessuna registrazione";
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.the_items, R.id.textViewItem, myItems1);
             itemList.setAdapter(adapter);
 
         }
