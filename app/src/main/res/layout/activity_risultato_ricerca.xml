@@ -18,7 +18,7 @@
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:background="@color/colorPLight"
+        android:background="@drawable/ripple"
         android:text="INDIETRO"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

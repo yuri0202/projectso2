@@ -30,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="67dp"
         android:layout_gravity="center"
-        android:background="@color/colorPLight"
+        android:background="@drawable/ripple"
         android:text="INDIETRO"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

@@ -17,14 +17,14 @@
         android:layout_gravity="center"
 
         android:layout_weight="0.59"
-        android:background="@color/colorPLight"
+        android:background="@drawable/ripple"
         android:text="INDIETRO"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <ScrollView
