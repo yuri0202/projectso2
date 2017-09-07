@@ -6,21 +6,18 @@
         <item name="colorPrimary">@color/colorP</item>
         <item name="colorPrimaryDark">@color/colorPDark</item>
         <item name="colorAccent">@color/colorPLight</item>
-        <item name="android:panelFullBackground">@android:color/darker_gray</item>
+        <item name="actionBarPopupTheme">@style/MainActionBar.Popup</item>
 
 
     </style>
 
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="android:colorBackground">@color/backGround</item>
-        <item name="android:textColor">@color/colorPLight</item>
+    <style name ="MainActionBar.Popup" parent ="Widget.AppCompat.PopupMenu">
+        <item name ="android:textColor">@color/colorP</item>
+        <item name ="android:colorBackground">@color/backGround</item>
+        <item name ="android:colorControlHighlight">@color/colorPDark</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <item name="android:colorBackground">@color/backGround</item>
-        <item name="android:textColor">@color/colorPLight</item>
-    </style>
 
 
 
