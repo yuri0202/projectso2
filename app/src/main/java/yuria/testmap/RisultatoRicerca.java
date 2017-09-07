@@ -1,7 +1,5 @@
 package yuria.testmap;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,9 +11,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import yuria.testmap.ListViewAdapters.RegAdapter;
+import yuria.testmap.ListViewAdapters.RegAdapterCardRicerca;
 import yuria.testmap.models.Registrazione;
 
 public class RisultatoRicerca extends MenuActivity {
@@ -77,7 +74,7 @@ public class RisultatoRicerca extends MenuActivity {
 
             }
             regMap = tempMap;
-            RegAdapter adapter = new RegAdapter(this,reg);
+            RegAdapterCardRicerca adapter = new RegAdapterCardRicerca(this,reg);
 
             itemList.setAdapter(adapter);
 

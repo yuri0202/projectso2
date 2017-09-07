@@ -14,16 +14,15 @@ import java.util.ArrayList;
 import yuria.testmap.DescAcquistoActivity;
 import yuria.testmap.MapsActivity;
 import yuria.testmap.R;
-import yuria.testmap.RisultatoRicerca;
 import yuria.testmap.models.Registrazione;
 
 /**
  * Created by yuria on 02/09/2017.
  */
 
-public class RegAdapter extends ArrayAdapter<Registrazione> {
+public class RegAdapterCardRicerca extends ArrayAdapter<Registrazione> {
 
-    public RegAdapter(Context context, ArrayList<Registrazione> regs)
+    public RegAdapterCardRicerca(Context context, ArrayList<Registrazione> regs)
     {
         super(context,0,regs);
     }
@@ -37,15 +36,15 @@ public class RegAdapter extends ArrayAdapter<Registrazione> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.card_items,parent,false);
         }
         current=convertView;
-        TextView tv1 = (TextView) convertView.findViewById(R.id.cardText1);
-        TextView tv2 = (TextView) convertView.findViewById(R.id.cardText2);
-        TextView tv3 = (TextView) convertView.findViewById(R.id.cardText3);
+        TextView tv1 = (TextView) convertView.findViewById(R.id.cardText21);
+        TextView tv2 = (TextView) convertView.findViewById(R.id.cardText22);
+        TextView tv3 = (TextView) convertView.findViewById(R.id.cardText23);
         tv1.setText("Nome: "+reg.getNome());
         tv2.setText("Tipo: "+reg.getTipo());
         tv3.setText("Prezzo: "+reg.getPrezzo());
 
 
-        Button detailsBtn = (Button) convertView.findViewById(R.id.cardDettagliBtn);
+        Button detailsBtn = (Button) convertView.findViewById(R.id.cardDettagli2Btn);
         Button mappaBtn = (Button) convertView.findViewById(R.id.cardMapBtn);
         detailsBtn.setTag(position);
         mappaBtn.setTag(position);

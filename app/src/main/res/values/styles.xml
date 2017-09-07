@@ -5,17 +5,24 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorP</item>
         <item name="colorPrimaryDark">@color/colorPDark</item>
+        <item name="colorAccent">@color/colorPLight</item>
+        <item name="android:panelFullBackground">@android:color/darker_gray</item>
+
 
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:colorBackground">@color/backGround</item>
+        <item name="android:textColor">@color/colorPLight</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <item name="android:colorBackground">@color/backGround</item>
+        <item name="android:textColor">@color/colorPLight</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 
