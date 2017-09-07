@@ -24,7 +24,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:background="@color/colorPLight"
+        android:background="@drawable/ripple"
         android:text="CALCOLA PERCORSO"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
