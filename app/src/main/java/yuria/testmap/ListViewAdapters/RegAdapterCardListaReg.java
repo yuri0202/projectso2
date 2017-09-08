@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import yuria.testmap.DescAcquistoActivity;
 import yuria.testmap.MapsActivity;
+import yuria.testmap.ModElimRegActivity;
 import yuria.testmap.R;
 import yuria.testmap.models.Registrazione;
 
@@ -66,7 +67,7 @@ public class RegAdapterCardListaReg extends ArrayAdapter<Registrazione> {
     private void showDetails(View v) {
         int position = (Integer) v.getTag();
         Registrazione reg = getItem(position);
-        Intent int1 = new Intent(current.getContext(), DescAcquistoActivity.class);
+        Intent int1 = new Intent(current.getContext(), ModElimRegActivity.class);
         int1.putExtra("activity","registrazione");
         int1.putExtra("reg",reg);
         current.getContext().startActivity(int1);

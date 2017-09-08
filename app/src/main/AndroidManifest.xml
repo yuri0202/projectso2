@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@drawable/ic_smartphone"
         android:roundIcon="@drawable/ic_smartphone"
@@ -43,8 +42,9 @@
         <activity
             android:name=".RicProdActivity"
             android:label="Ricerca Acquisto" />
-        <activity android:name=".RegProdActivity"
-            android:label="Registra Acquisto"/>
+        <activity
+            android:name=".RegProdActivity"
+            android:label="Registra Acquisto" />
         <activity
             android:name=".DescAcquistoActivity"
             android:label="Descrizione Acquisto" />
@@ -57,10 +57,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RisultatoRicerca"
-            android:label="Risultato Ricerca"/>
+        <activity
+            android:name=".RisultatoRicerca"
+            android:label="Risultato Ricerca" />
         <activity android:name=".test" />
-        <activity android:name=".test2"></activity>
+        <activity android:name=".test2" />
+        <activity
+            android:name=".ModElimRegActivity"
+            android:label="Descrizione Acquisto"></activity>
+        <activity android:name=".ModificaRegistrazione"
+            android:label="Modifica Registrazione"></activity>
     </application>
 
 </manifest>
