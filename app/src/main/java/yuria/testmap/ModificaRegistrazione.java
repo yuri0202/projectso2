@@ -36,6 +36,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -59,7 +60,10 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
     private LocationRequest mLocationRequest;
     private boolean mRequestingLocationUpdates = true;
     private static final String TAG = "debug";
+    String indirizzo;
     Registrazione regCurr = null;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
 
     final Activity activity = this;
     RestTemplate restTemplate = new RestTemplate();
@@ -111,6 +115,24 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
         nomeTxt = (EditText) findViewById(R.id.nomeTxt);
         tipoSpinner = (Spinner) findViewById(R.id.tipoSpinner);
 
+        detailsTxt.setText(regCurr.getDettagli());
+        nomeTxt.setText(regCurr.getNome());
+        prezzoTxt.setText(Float.toString(regCurr.getPrezzo()));
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        List<Address> addresses  = null;
+        try {
+            addresses = geocoder.getFromLocation(regCurr.getPos().getX(),regCurr.getPos().getY(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String address = addresses.get(0).getAddressLine(0);
+        String city = addresses.get(0).getLocality();
+        indirizzo = address +" "+city;
+        addressTxt.setText(indirizzo);
+        tipoSpinner.setSelection(getSpinnerIndexByValue(tipoSpinner,regCurr.getTipo()));
+
+
 
         IndietroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +170,16 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
         });
     }
 
+    private int getSpinnerIndexByValue(Spinner spinner, String value) {
+        int index = 0;
+        for (int i =0; i<spinner.getCount();i++){
+            if(spinner.getItemAtPosition(i).toString().equalsIgnoreCase(value)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
     private void registraProdotto() {
 
 
@@ -174,7 +206,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
             }else{
                 double lat = add.get(0).getLatitude();
                 double lon = add.get(0).getLongitude();
-                GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
+
                 newPoint = geometryFactory.createPoint(new Coordinate(lat, lon));
 
                 // Date nowDate = Calendar.getInstance().getTime();
@@ -183,16 +215,26 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
                 if (!detailsTxt.getText().toString().equals(""))
                     details=detailsTxt.getText().toString();
                 float prezzo = Float.parseFloat(prezzoTxt.getText().toString());
+                if(nomeTxt.getText().toString().equals(regCurr.getNome()) && tipoSpinner.getSelectedItem().toString().equals(regCurr.getTipo())
+                    && prezzoTxt.getText().toString().equals(Float.toString(regCurr.getPrezzo())) && indirizzo.equals(addressTxt.getText().toString())
+                        && details.equals(regCurr.getDettagli()))
+                {
+                    Toast.makeText(this,"E' necessario modificare almeno un campo",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    System.out.println(indirizzo + " " + addressTxt.getText().toString());
 
-                // IF PER VEDERE SE I CAMPI INSERITI SONO RIMASTI UGUALI
-                new ModificaRegistrazione.validateHttpRequest(regCurr.getIdreg(),nomeTxt.getText().toString(),
-                        tipoSpinner.getSelectedItem().toString(),
-                        newPoint,
-                        nowDate,
-                        details,
-                        null,
-                        MenuActivity.utente.getIdutente(),
-                        prezzo).execute();
+                    new ModificaRegistrazione.validateHttpRequest(regCurr.getIdreg(),
+                            nomeTxt.getText().toString(),
+                            tipoSpinner.getSelectedItem().toString(),
+                            newPoint,
+                            regCurr.getData(),
+                            details,
+                            null,
+                            MenuActivity.utente.getIdutente(),
+                            prezzo).execute();
+                            
+                }
 
             }
 
@@ -320,7 +362,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
             String state = addresses.get(0).getAdminArea();
             String zip = addresses.get(0).getPostalCode();
             String country = addresses.get(0).getCountryName();
-            addressTxt.setText(address +" "+city+" "+state+" "+zip+" "+country+" ");
+            addressTxt.setText(address +" "+city);
         } else
             addressTxt.setText("Couldn't get the location. Make sure location is enable on the device");
 
@@ -359,7 +401,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
             Registrazione reg = new Registrazione(idreg,nome,tipo,pos,data,dettagli,utente,idutente,prezzo);
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<Registrazione> entity = new HttpEntity<>(reg, headers);
-            final String ret =  restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/save_reg",entity,String.class);
+            final String ret =  restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/",entity,String.class);
 
 
             new Thread() {

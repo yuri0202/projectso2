@@ -313,7 +313,7 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
             String state = addresses.get(0).getAdminArea();
             String zip = addresses.get(0).getPostalCode();
             String country = addresses.get(0).getCountryName();
-            addressTxt.setText(address +" "+city+" "+state+" "+zip+" "+country+" ");
+            addressTxt.setText(address +" "+city);
         } else
            addressTxt.setText("Couldn't get the location. Make sure location is enable on the device");
 
