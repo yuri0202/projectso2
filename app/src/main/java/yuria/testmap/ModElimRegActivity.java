@@ -1,21 +1,39 @@
 package yuria.testmap;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.vividsolutions.jts.geom.Point;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import yuria.testmap.models.Registrazione;
+import yuria.testmap.models.Utente;
+
+import static java.util.Arrays.asList;
 
 public class ModElimRegActivity extends MenuActivity {
 
@@ -24,7 +42,14 @@ public class ModElimRegActivity extends MenuActivity {
     Button modBtn = null,elimBtn=null;
     String previousActivity = null;
     Registrazione regCurr = null;
+    final Activity activity = this;
+    List<Registrazione> regLista = null;
     TextView tipoTxt,nomeTxt,dataTxt,prezzoTxt,dettagliTxt,posTxt,utenteTxt;
+    RestTemplate restTemplate = new RestTemplate();
+    private List<MediaType> acceptableMediaTypes = asList(MediaType.APPLICATION_JSON);
+    HttpHeaders headers = new HttpHeaders() {{
+        setAccept(acceptableMediaTypes);
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +110,7 @@ public class ModElimRegActivity extends MenuActivity {
             @Override
             public void onClick(View v) {
 
-                //elimina
+                new ModElimRegActivity.validateHttpRequest(regCurr.getIdreg()).execute();
 
             }
         });
@@ -97,5 +122,45 @@ public class ModElimRegActivity extends MenuActivity {
         dettagliTxt = (TextView) findViewById(R.id.dettagliTxt);
         posTxt = (TextView) findViewById(R.id.posTxt);
         utenteTxt = (TextView) findViewById(R.id.utenteTxt);
+    }
+
+    private class validateHttpRequest extends AsyncTask<Void, Void, Void> {
+        int idreg;
+
+
+        public validateHttpRequest(int idreg) {
+            this.idreg = idreg;
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            //sostituire 0 con l'id
+            Registrazione reg = new Registrazione(idreg, null, null, null, null, null, null, 0, 0);
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            HttpEntity<Registrazione> entity = new HttpEntity<>(reg, headers);
+            final String ret = restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/delete_reg", entity, String.class);
+
+
+            new Thread() {
+                public void run() {
+                    ModElimRegActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (ret.equals("Registration successfully deleted"))
+                                Toast.makeText(activity, "Registrazione eliminata con successo!", Toast.LENGTH_LONG).show();
+                            else
+                                Toast.makeText(activity, "Errore - Registrazione non eliminata", Toast.LENGTH_LONG).show();
+
+
+                        }
+                    });
+                }
+            }.start();
+            return null;
+
+        }
     }
 }

@@ -233,7 +233,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
                             null,
                             MenuActivity.utente.getIdutente(),
                             prezzo).execute();
-                            
+
                 }
 
             }
@@ -401,7 +401,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
             Registrazione reg = new Registrazione(idreg,nome,tipo,pos,data,dettagli,utente,idutente,prezzo);
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<Registrazione> entity = new HttpEntity<>(reg, headers);
-            final String ret =  restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/",entity,String.class);
+            final String ret =  restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/update_reg",entity,String.class);
 
 
             new Thread() {
@@ -410,7 +410,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
 
                         @Override
                         public void run() {
-                            if(ret.equals("Registration successfully saved"))
+                            if(ret.equals("Registration successfully updated"))
                                 Toast.makeText(activity,"Modifiche effettuate con successo!",Toast.LENGTH_LONG).show();
                             else
                                 Toast.makeText(activity,"Errore - Modifiche non effettuate",Toast.LENGTH_LONG).show();
