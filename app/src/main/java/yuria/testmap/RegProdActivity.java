@@ -357,10 +357,12 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
 
                         @Override
                         public void run() {
-                            if(ret.equals("Registration successfully saved"))
-                                Toast.makeText(activity,"Registrazione effettuata con successo",Toast.LENGTH_LONG).show();
+                            if(ret.equals("Registration successfully saved")) {
+                                Toast.makeText(activity, "Registrazione effettuata con successo", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(RegProdActivity.this, HomeActivity.class));
+                            }
                             else
-                                Toast.makeText(activity,"Erroreeee",Toast.LENGTH_LONG).show();
+                                Toast.makeText(activity,"Errore",Toast.LENGTH_LONG).show();
 
 
 
