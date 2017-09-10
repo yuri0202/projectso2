@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorP</item>
         <item name="colorPrimaryDark">@color/colorPDark</item>
         <item name="colorAccent">@color/colorPLight</item>
+        <item name ="android:navigationBarColor">@color/colorPDark</item>
         <item name="actionBarPopupTheme">@style/MainActionBar.Popup</item>
 
 
