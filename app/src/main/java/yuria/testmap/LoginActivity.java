@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void run() {
                                 if (!finalUtente.getUsername().equals("") && !finalUtente.getPassword().equals("")){
                                     LayoutInflater inflater = getLayoutInflater();
-                                    View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.custom_toast_container));
+                                    View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.custom_toast_container_login_success));
 
                                     TextView text = (TextView) layout.findViewById(R.id.text);
                                     text.setText("Login effettuato con successo");
