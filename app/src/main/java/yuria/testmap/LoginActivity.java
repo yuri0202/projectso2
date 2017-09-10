@@ -105,19 +105,37 @@ public class LoginActivity extends AppCompatActivity {
                                     toast.setDuration(Toast.LENGTH_LONG);
                                     toast.setView(layout);
                                     toast.show();
-                                    //Toast.makeText(activity, "Login effettuato con successo", Toast.LENGTH_LONG).show();
                                     MenuActivity.utente = finalUtente;
                                     System.out.println(finalUtente.getUsername() + " " + finalUtente.getPassword() + " " + finalUtente.getNome() + " " + finalUtente.getCognome() + " " + finalUtente.getIdutente());
                                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                     finish();
                                 }
-                                else if(finalUtente.getUsername().equals(""))
-                                    Toast.makeText(activity, "Username errato", Toast.LENGTH_LONG).show();
+                                else if(finalUtente.getUsername().equals("")) {
+                                    LayoutInflater inflater = getLayoutInflater();
+                                    View layout = inflater.inflate(R.layout.custom_toast_error, (ViewGroup) findViewById(R.id.custom_toast_container_login_error));
 
-                                else
+                                    TextView text = (TextView) layout.findViewById(R.id.text);
+                                    text.setText("Username errato");
 
-                                    Toast.makeText(activity, "Password errata", Toast.LENGTH_LONG).show();
+                                    Toast toast = new Toast(getApplicationContext());
+                                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                    toast.setDuration(Toast.LENGTH_LONG);
+                                    toast.setView(layout);
+                                    toast.show();
+                                }
+                                else {
+                                    LayoutInflater inflater = getLayoutInflater();
+                                    View layout = inflater.inflate(R.layout.custom_toast_error, (ViewGroup) findViewById(R.id.custom_toast_container_login_error));
 
+                                    TextView text = (TextView) layout.findViewById(R.id.text);
+                                    text.setText("Password errata");
+
+                                    Toast toast = new Toast(getApplicationContext());
+                                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                    toast.setDuration(Toast.LENGTH_LONG);
+                                    toast.setView(layout);
+                                    toast.show();
+                                }
                             }
                         });
                     }
