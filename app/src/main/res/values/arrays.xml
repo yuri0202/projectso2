@@ -3,23 +3,29 @@
 
 
     <string-array name = "tipo">
-        <item>Scarpe </item>
-        <item>Vestiti</item>
-        <item>Borse e Accessori</item>
-        <item>Libri</item>
-        <item>Musica e FIlm</item>
-        <item>Casa, Giardino</item>
+        <item>Abbigliamento e Scarpe</item>
+        <item>Auto e Moto</item>
+        <item>Borse e Gioielli</item>
+        <item>Casa e Giardino</item>
         <item>Elettronica e Informatica</item>
+        <item>Libri</item>
+        <item>Musica e Film</item>
+        <item>Orologi</item>
+        <item>Software</item>
+        <item>Videogiochi</item>
     </string-array>
 
     <string-array name = "tipo2">
         <item>Tutti</item>
-        <item>Scarpe </item>
-        <item>Vestiti</item>
-        <item>Borse e Accessori</item>
-        <item>Libri</item>
-        <item>Musica e FIlm</item>
-        <item>Casa, Giardino</item>
+        <item>Abbigliamento e Scarpe</item>
+        <item>Auto e Moto</item>
+        <item>Borse e Gioielli</item>
+        <item>Casa e Giardino</item>
         <item>Elettronica e Informatica</item>
+        <item>Libri</item>
+        <item>Musica e Film</item>
+        <item>Orologi</item>
+        <item>Software</item>
+        <item>Videogiochi</item>
     </string-array>
 </resources>
