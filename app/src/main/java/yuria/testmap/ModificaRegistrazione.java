@@ -137,7 +137,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
         IndietroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ModificaRegistrazione.this, HomeActivity.class));
+               onBackPressed();
             }
         });
 
@@ -410,8 +410,10 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
 
                         @Override
                         public void run() {
-                            if(ret.equals("Registration successfully updated"))
-                                Toast.makeText(activity,"Modifiche effettuate con successo!",Toast.LENGTH_LONG).show();
+                            if(ret.equals("Registration successfully updated")) {
+                                Toast.makeText(activity, "Modifiche effettuate con successo!", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(ModificaRegistrazione.this, RegistrazioneActivity.class));
+                            }
                             else
                                 Toast.makeText(activity,"Errore - Modifiche non effettuate",Toast.LENGTH_LONG).show();
 
