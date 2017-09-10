@@ -149,8 +149,10 @@ public class ModElimRegActivity extends MenuActivity {
 
                         @Override
                         public void run() {
-                            if (ret.equals("Registration successfully deleted"))
+                            if (ret.equals("Registration successfully deleted")) {
                                 Toast.makeText(activity, "Registrazione eliminata con successo!", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(ModElimRegActivity.this, RegistrazioneActivity.class));
+                            }
                             else
                                 Toast.makeText(activity, "Errore - Registrazione non eliminata", Toast.LENGTH_LONG).show();
 
