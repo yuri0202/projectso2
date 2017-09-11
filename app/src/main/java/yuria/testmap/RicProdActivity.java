@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -196,7 +197,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                     dataATxt.setText(Double.toString(longitude));*/
                     pos =  geometryFactory.createPoint(new Coordinate(latitude, longitude));
                 }else{
-                    Toast.makeText(RicProdActivity.this,"Attiva GPS",Toast.LENGTH_LONG).show();
+                    CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_warning), R.layout.custom_toast_warning,  "Attiva GPS");
                     return;
                 }
 

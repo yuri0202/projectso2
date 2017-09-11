@@ -7,11 +7,14 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import yuria.testmap.models.Utente;
 
@@ -45,7 +48,8 @@ public class MenuActivity extends AppCompatActivity {
         }
         else if (id== R.id.menuLogout){
             //Logout menu is clicked
-            Toast.makeText(this,"Logout effettuato con successo",Toast.LENGTH_LONG).show();
+
+            CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Logout effettuato con successo");
             MenuActivity.utente=null;
             startActivity(new Intent(this,LoginActivity.class));
         }

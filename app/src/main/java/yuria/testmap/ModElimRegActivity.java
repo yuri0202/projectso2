@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -150,12 +151,11 @@ public class ModElimRegActivity extends MenuActivity {
                         @Override
                         public void run() {
                             if (ret.equals("Registration successfully deleted")) {
-                                Toast.makeText(activity, "Registrazione eliminata con successo!", Toast.LENGTH_LONG).show();
+                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Registrazione eliminata con successo");
                                 startActivity(new Intent(ModElimRegActivity.this, RegistrazioneActivity.class));
                             }
                             else
-                                Toast.makeText(activity, "Errore - Registrazione non eliminata", Toast.LENGTH_LONG).show();
-
+                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Registrazione non eliminata");
 
                         }
                     });
