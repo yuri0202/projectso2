@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -150,7 +151,7 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
     private void registraProdotto() {
         if(nomeTxt.getText().toString().equals("") ||  prezzoTxt.getText().toString().equals("") ||
                 addressTxt.getText().toString().equals("")  )
-            Toast.makeText(this,"Inserire campi obbligatori",Toast.LENGTH_LONG).show();
+            CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Inserire campi obbligatori");
         else{
             List<Address> add = null;
             String ind = null;
@@ -163,7 +164,7 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
                 e.printStackTrace();
             }
             if(add.size()==0) {
-                    Toast.makeText(this,"Indirizzo non trovato, riprova!",Toast.LENGTH_LONG).show();
+                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Indirizzo non trovato, riprova");
             }else{
                 double lat = add.get(0).getLatitude();
                 double lon = add.get(0).getLongitude();
@@ -358,11 +359,11 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
                         @Override
                         public void run() {
                             if(ret.equals("Registration successfully saved")) {
-                                Toast.makeText(activity, "Registrazione effettuata con successo", Toast.LENGTH_LONG).show();
+                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Registrazione effettuata con successo");
                                 startActivity(new Intent(RegProdActivity.this, HomeActivity.class));
                             }
                             else
-                                Toast.makeText(activity,"Errore",Toast.LENGTH_LONG).show();
+                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Non è stato possibile registrare il prodotto");
 
 
 

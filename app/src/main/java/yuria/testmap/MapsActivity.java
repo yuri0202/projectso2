@@ -14,9 +14,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -183,8 +187,7 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
     private void getCurrPosition() {
         if (ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            System.out.println("NON ENTRA");
-            return;
+           return;
         }
 
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
@@ -193,10 +196,9 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
         if (mLastLocation != null) {
             latitude = mLastLocation.getLatitude();
             longitude = mLastLocation.getLongitude();
-            System.out.println("ENTRA");
             actualPos =  geometryFactory.createPoint(new Coordinate(latitude, longitude));
         }else{
-            Toast.makeText(MapsActivity.this,"Attiva GPS",Toast.LENGTH_LONG).show();
+            CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_warning), R.layout.custom_toast_warning,  "Attiva GPS");
             return;
         }
         setMarkers();

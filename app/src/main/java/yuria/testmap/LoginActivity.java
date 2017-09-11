@@ -94,47 +94,17 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (!finalUtente.getUsername().equals("") && !finalUtente.getPassword().equals("")){
-                                    LayoutInflater inflater = getLayoutInflater();
-                                    View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.custom_toast_container_login_success));
-
-                                    TextView text = (TextView) layout.findViewById(R.id.text);
-                                    text.setText("Login effettuato con successo");
-
-                                    Toast toast = new Toast(getApplicationContext());
-                                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                    toast.setDuration(Toast.LENGTH_LONG);
-                                    toast.setView(layout);
-                                    toast.show();
+                                    CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Login effettuato con successo");
                                     MenuActivity.utente = finalUtente;
                                     System.out.println(finalUtente.getUsername() + " " + finalUtente.getPassword() + " " + finalUtente.getNome() + " " + finalUtente.getCognome() + " " + finalUtente.getIdutente());
                                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                     finish();
                                 }
                                 else if(finalUtente.getUsername().equals("")) {
-                                    LayoutInflater inflater = getLayoutInflater();
-                                    View layout = inflater.inflate(R.layout.custom_toast_error, (ViewGroup) findViewById(R.id.custom_toast_container_login_error));
-
-                                    TextView text = (TextView) layout.findViewById(R.id.text);
-                                    text.setText("Username errato");
-
-                                    Toast toast = new Toast(getApplicationContext());
-                                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                    toast.setDuration(Toast.LENGTH_LONG);
-                                    toast.setView(layout);
-                                    toast.show();
+                                    CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Username errato");
                                 }
                                 else {
-                                    LayoutInflater inflater = getLayoutInflater();
-                                    View layout = inflater.inflate(R.layout.custom_toast_error, (ViewGroup) findViewById(R.id.custom_toast_container_login_error));
-
-                                    TextView text = (TextView) layout.findViewById(R.id.text);
-                                    text.setText("Password errata");
-
-                                    Toast toast = new Toast(getApplicationContext());
-                                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                    toast.setDuration(Toast.LENGTH_LONG);
-                                    toast.setView(layout);
-                                    toast.show();
+                                    CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Password errata");
                                 }
                             }
                         });

@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -191,7 +192,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
 
         if(nomeTxt.getText().toString().equals("") ||  prezzoTxt.getText().toString().equals("") ||
                 addressTxt.getText().toString().equals("")  )
-            Toast.makeText(this,"Inserire campi obbligatori",Toast.LENGTH_LONG).show();
+            CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Inserire campi obbligatori");
         else{
 
 
@@ -202,7 +203,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
                 e.printStackTrace();
             }
             if(add.size()==0) {
-                Toast.makeText(this,"Indirizzo non trovato, riprova!",Toast.LENGTH_LONG).show();
+                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Indirizzo non trovato, riprova");
             }else{
                 double lat = add.get(0).getLatitude();
                 double lon = add.get(0).getLongitude();
@@ -219,7 +220,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
                     && prezzoTxt.getText().toString().equals(Float.toString(regCurr.getPrezzo())) && indirizzo.equals(addressTxt.getText().toString())
                         && details.equals(regCurr.getDettagli()))
                 {
-                    Toast.makeText(this,"E' necessario modificare almeno un campo",Toast.LENGTH_SHORT).show();
+                    CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "E' necessario modificare almeno un campo");
                 }
                 else {
                     System.out.println(indirizzo + " " + addressTxt.getText().toString());
@@ -411,11 +412,11 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
                         @Override
                         public void run() {
                             if(ret.equals("Registration successfully updated")) {
-                                Toast.makeText(activity, "Modifiche effettuate con successo!", Toast.LENGTH_LONG).show();
+                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Modifiche effettuate con successo");
                                 startActivity(new Intent(ModificaRegistrazione.this, RegistrazioneActivity.class));
                             }
                             else
-                                Toast.makeText(activity,"Errore - Modifiche non effettuate",Toast.LENGTH_LONG).show();
+                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Non è stato possibile effettuare le modifiche");
 
 
 

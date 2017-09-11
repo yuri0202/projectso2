@@ -4,7 +4,7 @@
     <padding android:left="7dp" android:top="7dp"
         android:right="7dp" android:bottom="7dp" />
     <corners android:radius="4dp" />
-    <gradient android:startColor="#1cb30000"
-        android:endColor="#1cb30000"
+    <gradient android:startColor="#fca9a9"
+        android:endColor="#fca9a9"
         android:angle="-90"/>
 </shape>
