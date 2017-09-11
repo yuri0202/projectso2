@@ -92,16 +92,6 @@ public class RegistrazioneActivity extends MenuActivity {
 
             itemList.setAdapter(adapter);
 
-            itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    /*
-                    Intent int1 = new Intent(RegistrazioneActivity.this, DescAcquistoActivity.class);
-                    int1.putExtra("activity", "registrazione");
-                    int1.putExtra("reg", regMap.get(position));
-                    startActivity(int1);*/
-                }
-            });
         }
         else{ //no registrations
             String [] myItems1= new String[1];
@@ -143,8 +133,6 @@ public class RegistrazioneActivity extends MenuActivity {
 
                             @Override
                             public void run() {
-                                //System.out.println("GRANDEZZA LISTA: "+regLista.size());
-                                //System.out.println("nome: "+regLista.get(0).getNome());
                                 if(regLista.get(0).getNome()== null)
                                     populateListView(0);
                                  else

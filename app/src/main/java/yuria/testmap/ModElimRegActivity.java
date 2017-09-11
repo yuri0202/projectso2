@@ -1,10 +1,12 @@
 package yuria.testmap;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -58,8 +60,6 @@ public class ModElimRegActivity extends MenuActivity {
         setContentView(R.layout.activity_mod_elim_reg);
         Bundle bun = getIntent().getExtras();
         regCurr = (Registrazione) bun.get("reg");
-        // Toast.makeText(this,"Reg: "+regCurr.getNome() + "  "+regCurr.getTipo(),Toast.LENGTH_SHORT).show();
-
 
         initWidgets();
         setRegInfo();
@@ -88,7 +88,7 @@ public class ModElimRegActivity extends MenuActivity {
         dataTxt.setText(df.format(regCurr.getData()));
 
         prezzoTxt.setText(Float.toString(regCurr.getPrezzo())+" €");
-        posTxt.setText(addresses.get(0).getAddressLine(0) +"   "+addresses.get(0).getLocality());
+        posTxt.setText(addresses.get(0).getAddressLine(0));
         dettagliTxt.setText(regCurr.getDettagli());
     }
 
@@ -110,9 +110,18 @@ public class ModElimRegActivity extends MenuActivity {
         elimBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new AlertDialog.Builder(ModElimRegActivity.this)
+                        .setTitle("Conferma")
+                        .setMessage("Sei sicuro di voler eliminare la registrazione?")
+                        .setIcon(R.drawable.ic_warning_black_24dp)
+                        
+                        .setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener()  {
+                            public void onClick(DialogInterface dialog, int whichButton){
+                                new ModElimRegActivity.validateHttpRequest(regCurr.getIdreg()).execute();
 
-                new ModElimRegActivity.validateHttpRequest(regCurr.getIdreg()).execute();
-
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no,null).show();
             }
         });
 

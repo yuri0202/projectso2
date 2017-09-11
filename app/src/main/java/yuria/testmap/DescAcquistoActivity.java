@@ -58,7 +58,7 @@ public class DescAcquistoActivity extends MenuActivity {
         dataTxt.setText(df.format(regCurr.getData()));
 
         prezzoTxt.setText(Float.toString(regCurr.getPrezzo())+" €");
-        posTxt.setText(addresses.get(0).getAddressLine(0) +"   "+addresses.get(0).getLocality());
+        posTxt.setText(addresses.get(0).getAddressLine(0));
         dettagliTxt.setText(regCurr.getDettagli());
     }
 

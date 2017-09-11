@@ -129,7 +129,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
         }
         String address = addresses.get(0).getAddressLine(0);
         String city = addresses.get(0).getLocality();
-        indirizzo = address +" "+city;
+        indirizzo = address;
         addressTxt.setText(indirizzo);
         tipoSpinner.setSelection(getSpinnerIndexByValue(tipoSpinner,regCurr.getTipo()));
 
@@ -359,11 +359,8 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
 
 
             String address = addresses.get(0).getAddressLine(0);
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String zip = addresses.get(0).getPostalCode();
-            String country = addresses.get(0).getCountryName();
-            addressTxt.setText(address +" "+city);
+
+            addressTxt.setText(address);
         } else
             addressTxt.setText("Couldn't get the location. Make sure location is enable on the device");
 
