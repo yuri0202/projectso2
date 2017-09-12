@@ -49,7 +49,7 @@ public class DescAcquistoActivity extends MenuActivity {
             e.printStackTrace();
         }
 
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 
         utenteTxt.setText(regCurr.getUtente().getNome() +" "+regCurr.getUtente().getCognome());

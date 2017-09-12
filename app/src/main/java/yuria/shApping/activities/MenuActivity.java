@@ -18,10 +18,6 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        MenuItem menuHome = (MenuItem) findViewById(R.id.menuHome);
-        MenuItem menuRegistrazioni = (MenuItem) findViewById(R.id.menuRegistrazioni);
-        MenuItem menuLogout = (MenuItem) findViewById(R.id.menuLogout);
-        
 
     }
 

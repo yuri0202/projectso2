@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import yuria.shApping.R;
@@ -55,8 +56,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
     Button cercaBtn, homeBtn, scegliDaBtn, scegliABtn;
     EditText dataDaTxt,dataATxt,prezzoDaTxt,prezzoATxt,distanzaTxt;
     Spinner tipoSpinner;
-
-
+    
     final Activity activity = this;
     ArrayList<Registrazione> regLista = null;
     RestTemplate restTemplate = new RestTemplate();
@@ -66,6 +66,12 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
         setAccept(acceptableMediaTypes);
     }};
 
+    String tipo = null;
+    Date dataDa = null;
+    Date dataA = null;
+    Float prezzoDa = null;
+    Float prezzoA = null;
+    Float distanza = null;
     Point pos;
     private Calendar startDate,endDate;
     private Calendar startCurrent = null, endCurrent = null;
@@ -165,23 +171,31 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
         cercaBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
 
-                // Prendi dati
-                String tipo = null;
-                Date dataDa = null;
-                Date dataA = null;
-                Float prezzoDa = null;
-                Float prezzoA = null;
-                Float distanza = null;
+
                 if (!tipoSpinner.getSelectedItem().toString().equals("Tutti"))
                     tipo=tipoSpinner.getSelectedItem().toString();
-                if (!dataDaTxt.getText().toString().equals(""))
+                if (!dataDaTxt.getText().toString().equals("") && !dataATxt.getText().toString().equals("")) {
                     dataDa = startCurrent.getTime();
-                if (!dataATxt.getText().toString().equals(""))
                     dataA = endCurrent.getTime();
-                if (!prezzoDaTxt.getText().toString().equals(""))
+                }else if (!dataDaTxt.getText().toString().equals("") && dataATxt.getText().toString().equals("")) {
+                    dataDa = startCurrent.getTime();
+                    dataA= new GregorianCalendar().getTime();
+                }else if (dataDaTxt.getText().toString().equals("") && !dataATxt.getText().toString().equals("")){
+                    dataA = endCurrent.getTime();
+                    dataDa = new GregorianCalendar(1990,1,1).getTime();
+                }
+
+                if (!prezzoDaTxt.getText().toString().equals("") &&!prezzoATxt.getText().toString().equals("") ) {
                     prezzoDa=Float.parseFloat(prezzoDaTxt.getText().toString());
-                if (!prezzoATxt.getText().toString().equals(""))
                     prezzoA=Float.parseFloat(prezzoATxt.getText().toString());
+                }else if (!prezzoDaTxt.getText().toString().equals("") && prezzoATxt.getText().toString().equals("")) {
+                    prezzoDa=Float.parseFloat(prezzoDaTxt.getText().toString());
+                    prezzoA=Float.parseFloat("9000000");
+                }else if (prezzoDaTxt.getText().toString().equals("") &&!prezzoATxt.getText().toString().equals("")){
+                    prezzoDa=Float.parseFloat("0");
+                    prezzoA=Float.parseFloat(prezzoATxt.getText().toString());
+                }
+
                 if (!distanzaTxt.getText().toString().equals(""))
                     distanza=Float.parseFloat(distanzaTxt.getText().toString());
 
