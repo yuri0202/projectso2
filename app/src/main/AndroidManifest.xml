@@ -63,7 +63,7 @@
         <activity
             android:name="yuria.shApping.activities.ModElimRegActivity"
             android:label="Descrizione Acquisto"></activity>
-        <activity android:name="yuria.shApping.activities.ModificaRegistrazione"
+        <activity android:name="yuria.shApping.activities.ModificaRegistrazioneActivity"
             android:label="Modifica Registrazione"></activity>
     </application>
 

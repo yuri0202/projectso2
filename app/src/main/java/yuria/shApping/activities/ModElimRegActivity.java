@@ -93,7 +93,7 @@ public class ModElimRegActivity extends MenuActivity {
             @Override
             public void onClick(View v) {
                // start modifica activity
-                Intent int1 = new Intent(ModElimRegActivity.this, ModificaRegistrazione.class);
+                Intent int1 = new Intent(ModElimRegActivity.this, ModificaRegistrazioneActivity.class);
                 int1.putExtra("reg",regCurr);
                 startActivity(int1);
 

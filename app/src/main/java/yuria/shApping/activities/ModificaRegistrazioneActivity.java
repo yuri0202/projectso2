@@ -48,7 +48,7 @@ import yuria.shApping.resources.CustomToast;
 
 import static java.util.Arrays.asList;
 
-public class ModificaRegistrazione extends MenuActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+public class ModificaRegistrazioneActivity extends MenuActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     Button IndietroBtn, posBtn,modBtn;
     EditText addressTxt,detailsTxt,nomeTxt,prezzoTxt;
@@ -226,7 +226,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
                 else {
                     System.out.println(indirizzo + " " + addressTxt.getText().toString());
 
-                    new ModificaRegistrazione.validateHttpRequest(regCurr.getIdreg(),
+                    new ModificaRegistrazioneActivity.validateHttpRequest(regCurr.getIdreg(),
                             nomeTxt.getText().toString(),
                             tipoSpinner.getSelectedItem().toString(),
                             newPoint,
@@ -405,13 +405,13 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
 
             new Thread() {
                 public void run() {
-                    ModificaRegistrazione.this.runOnUiThread(new Runnable() {
+                    ModificaRegistrazioneActivity.this.runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
                             if(ret.equals("Registration successfully updated")) {
                                 CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Modifiche effettuate con successo");
-                                startActivity(new Intent(ModificaRegistrazione.this, RegistrazioneActivity.class));
+                                startActivity(new Intent(ModificaRegistrazioneActivity.this, RegistrazioneActivity.class));
                             }
                             else
                                 CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Non è stato possibile effettuare le modifiche");
