@@ -114,7 +114,7 @@ public class ModElimRegActivity extends MenuActivity {
                         .setTitle("Conferma")
                         .setMessage("Sei sicuro di voler eliminare la registrazione?")
                         .setIcon(R.drawable.ic_warning_black_24dp)
-                        
+
                         .setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener()  {
                             public void onClick(DialogInterface dialog, int whichButton){
                                 new ModElimRegActivity.validateHttpRequest(regCurr.getIdreg()).execute();
