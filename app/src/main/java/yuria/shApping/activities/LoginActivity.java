@@ -1,39 +1,28 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.List;
-import java.util.Map;
 
-import yuria.testmap.models.Utente;
+import yuria.shApping.R;
+import yuria.shApping.models.Utente;
+import yuria.shApping.resources.CustomToast;
 
 import static java.util.Arrays.asList;
 

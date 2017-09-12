@@ -1,4 +1,4 @@
-package yuria.testmap.models;
+package yuria.shApping.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Point;
@@ -6,7 +6,7 @@ import com.vividsolutions.jts.geom.Point;
 import java.io.Serializable;
 import java.util.Date;
 
-import yuria.testmap.serializers.PointToJsonSerializer;
+import yuria.shApping.serializers.PointToJsonSerializer;
 
 /**
  * Created by yuria on 30/08/2017.

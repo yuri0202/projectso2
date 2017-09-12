@@ -1,4 +1,4 @@
-package yuria.testmap;
+package yuria.shApping;
 
 import org.junit.Test;
 

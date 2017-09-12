@@ -1,4 +1,4 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -7,19 +7,14 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.vividsolutions.jts.geom.Point;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -27,14 +22,12 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import yuria.testmap.models.Registrazione;
-import yuria.testmap.models.Utente;
+import yuria.shApping.R;
+import yuria.shApping.models.Registrazione;
+import yuria.shApping.resources.CustomToast;
 
 import static java.util.Arrays.asList;
 

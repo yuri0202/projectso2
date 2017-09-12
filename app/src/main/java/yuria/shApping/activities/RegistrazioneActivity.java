@@ -1,11 +1,10 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -22,8 +21,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import yuria.testmap.ListViewAdapters.RegAdapterCardListaReg;
-import yuria.testmap.models.Registrazione;
+import yuria.shApping.ListViewAdapters.RegAdapterCardListaReg;
+import yuria.shApping.R;
+import yuria.shApping.models.Registrazione;
 
 import static java.util.Arrays.asList;
 

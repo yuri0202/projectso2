@@ -1,13 +1,11 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import yuria.testmap.models.Utente;
+import yuria.shApping.R;
 
 public class HomeActivity extends MenuActivity {
     public Button ricpro, regpro;

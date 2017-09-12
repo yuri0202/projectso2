@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="yuria.testmap.DescAcquistoActivity">
+    tools:context="yuria.shApping.activities.DescAcquistoActivity">
 
 
     <Button

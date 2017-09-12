@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="yuria.testmap">
+    package="yuria.shApping">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -30,26 +30,26 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".HomeActivity"
+            android:name="yuria.shApping.activities.HomeActivity"
             android:label="Home" />
-        <activity android:name=".MenuActivity" />
+        <activity android:name="yuria.shApping.activities.MenuActivity" />
         <activity
-            android:name=".MapsActivity"
+            android:name="yuria.shApping.activities.MapsActivity"
             android:label="Mappa" />
         <activity
-            android:name=".RegistrazioneActivity"
+            android:name="yuria.shApping.activities.RegistrazioneActivity"
             android:label="Le Mie Registrazioni" />
         <activity
-            android:name=".RicProdActivity"
+            android:name="yuria.shApping.activities.RicProdActivity"
             android:label="Ricerca Acquisto" />
         <activity
-            android:name=".RegProdActivity"
+            android:name="yuria.shApping.activities.RegProdActivity"
             android:label="Registra Acquisto" />
         <activity
-            android:name=".DescAcquistoActivity"
+            android:name="yuria.shApping.activities.DescAcquistoActivity"
             android:label="Descrizione Acquisto" />
         <activity
-            android:name=".LoginActivity"
+            android:name="yuria.shApping.activities.LoginActivity"
             android:label="shApping">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,14 +58,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RisultatoRicerca"
+            android:name="yuria.shApping.activities.RisultatoRicercaActivity"
             android:label="Risultato Ricerca" />
-        <activity android:name=".test" />
-        <activity android:name=".test2" />
         <activity
-            android:name=".ModElimRegActivity"
+            android:name="yuria.shApping.activities.ModElimRegActivity"
             android:label="Descrizione Acquisto"></activity>
-        <activity android:name=".ModificaRegistrazione"
+        <activity android:name="yuria.shApping.activities.ModificaRegistrazione"
             android:label="Modifica Registrazione"></activity>
     </application>
 

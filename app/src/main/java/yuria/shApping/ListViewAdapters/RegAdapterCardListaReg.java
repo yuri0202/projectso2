@@ -1,4 +1,4 @@
-package yuria.testmap.ListViewAdapters;
+package yuria.shApping.ListViewAdapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,9 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import yuria.testmap.DescAcquistoActivity;
-import yuria.testmap.MapsActivity;
-import yuria.testmap.ModElimRegActivity;
-import yuria.testmap.R;
-import yuria.testmap.models.Registrazione;
+import yuria.shApping.activities.ModElimRegActivity;
+import yuria.shApping.R;
+import yuria.shApping.models.Registrazione;
 
 /**
  * Created by yuria on 07/09/2017.

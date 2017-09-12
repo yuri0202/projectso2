@@ -1,22 +1,15 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.Gravity;
-import android.view.InflateException;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-import yuria.testmap.models.Utente;
+
+import yuria.shApping.R;
+import yuria.shApping.models.Utente;
+import yuria.shApping.resources.CustomToast;
 
 public class MenuActivity extends AppCompatActivity {
     public static Utente utente;

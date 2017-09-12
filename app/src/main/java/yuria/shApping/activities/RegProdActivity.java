@@ -1,4 +1,4 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +19,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationServices;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -37,19 +39,20 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import yuria.testmap.models.Registrazione;
-import yuria.testmap.models.Utente;
+import yuria.shApping.R;
+import yuria.shApping.models.Registrazione;
+import yuria.shApping.models.Utente;
+import yuria.shApping.resources.CustomToast;
 
 import static java.util.Arrays.asList;
 
-public class ModificaRegistrazione extends MenuActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
-    Button IndietroBtn, posBtn,modBtn;
+public class RegProdActivity extends MenuActivity implements ConnectionCallbacks, OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+    Button IndietroBtn, posBtn,registraBtn;
     EditText addressTxt,detailsTxt,nomeTxt,prezzoTxt;
     Spinner tipoSpinner;
     Location mLastLocation = null;
@@ -61,10 +64,6 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
     private LocationRequest mLocationRequest;
     private boolean mRequestingLocationUpdates = true;
     private static final String TAG = "debug";
-    String indirizzo;
-    Registrazione regCurr = null;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
 
     final Activity activity = this;
     RestTemplate restTemplate = new RestTemplate();
@@ -98,9 +97,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modifica_registrazione);
-        Bundle bun = getIntent().getExtras();
-        regCurr = (Registrazione) bun.get("reg");
+        setContentView(R.layout.activity_reg_prod);
         initWidget();
 
 
@@ -109,36 +106,18 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
     private void initWidget() {
         IndietroBtn = (Button) findViewById(R.id.indietroRicBtn);
         posBtn = (Button) findViewById(R.id.positionBtn);
-        modBtn = (Button) findViewById(R.id.RegistraBtn);
+        registraBtn = (Button) findViewById(R.id.RegistraBtn);
         detailsTxt = (EditText) findViewById(R.id.detailsTxt);
         addressTxt = (EditText) findViewById(R.id.addressTxt);
         prezzoTxt = (EditText) findViewById(R.id.prezzoTxt);
         nomeTxt = (EditText) findViewById(R.id.nomeTxt);
         tipoSpinner = (Spinner) findViewById(R.id.tipoSpinner);
 
-        detailsTxt.setText(regCurr.getDettagli());
-        nomeTxt.setText(regCurr.getNome());
-        prezzoTxt.setText(Float.toString(regCurr.getPrezzo()));
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-        List<Address> addresses  = null;
-        try {
-            addresses = geocoder.getFromLocation(regCurr.getPos().getX(),regCurr.getPos().getY(), 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String address = addresses.get(0).getAddressLine(0);
-        String city = addresses.get(0).getLocality();
-        indirizzo = address;
-        addressTxt.setText(indirizzo);
-        tipoSpinner.setSelection(getSpinnerIndexByValue(tipoSpinner,regCurr.getTipo()));
-
-
 
         IndietroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onBackPressed();
+                startActivity(new Intent(RegProdActivity.this, HomeActivity.class));
             }
         });
 
@@ -163,7 +142,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
             }
         });
 
-        modBtn.setOnClickListener(new View.OnClickListener() {
+        registraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registraProdotto();
@@ -171,31 +150,15 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
         });
     }
 
-    private int getSpinnerIndexByValue(Spinner spinner, String value) {
-        int index = 0;
-        for (int i =0; i<spinner.getCount();i++){
-            if(spinner.getItemAtPosition(i).toString().equalsIgnoreCase(value)) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
     private void registraProdotto() {
-
-
-
-        List<Address> add = null;
-        String ind = null;
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        Point newPoint=null;
-
         if(nomeTxt.getText().toString().equals("") ||  prezzoTxt.getText().toString().equals("") ||
                 addressTxt.getText().toString().equals("")  )
             CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Inserire campi obbligatori");
         else{
-
-
+            List<Address> add = null;
+            String ind = null;
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            Point newPoint=null;
             try {
                 ind = addressTxt.getText().toString();
                 add = geocoder.getFromLocationName(ind,1);
@@ -207,35 +170,25 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
             }else{
                 double lat = add.get(0).getLatitude();
                 double lon = add.get(0).getLongitude();
-
+                GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
                 newPoint = geometryFactory.createPoint(new Coordinate(lat, lon));
 
-                // Date nowDate = Calendar.getInstance().getTime();
+               // Date nowDate = Calendar.getInstance().getTime();
                 Date nowDate = new Date();
                 String details = "";
                 if (!detailsTxt.getText().toString().equals(""))
                     details=detailsTxt.getText().toString();
                 float prezzo = Float.parseFloat(prezzoTxt.getText().toString());
-                if(nomeTxt.getText().toString().equals(regCurr.getNome()) && tipoSpinner.getSelectedItem().toString().equals(regCurr.getTipo())
-                    && prezzoTxt.getText().toString().equals(Float.toString(regCurr.getPrezzo())) && indirizzo.equals(addressTxt.getText().toString())
-                        && details.equals(regCurr.getDettagli()))
-                {
-                    CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "E' necessario modificare almeno un campo");
-                }
-                else {
-                    System.out.println(indirizzo + " " + addressTxt.getText().toString());
 
-                    new ModificaRegistrazione.validateHttpRequest(regCurr.getIdreg(),
-                            nomeTxt.getText().toString(),
-                            tipoSpinner.getSelectedItem().toString(),
-                            newPoint,
-                            regCurr.getData(),
-                            details,
-                            null,
-                            MenuActivity.utente.getIdutente(),
-                            prezzo).execute();
-
-                }
+                //Chiamare costruttore per cazzimmocca.
+                new RegProdActivity.validateHttpRequest(nomeTxt.getText().toString(),
+                                                        tipoSpinner.getSelectedItem().toString(),
+                                                        newPoint,
+                                                        nowDate,
+                                                        details,
+                                                        null,
+                                                        MenuActivity.utente.getIdutente(),
+                                                        prezzo).execute();
 
             }
 
@@ -345,8 +298,8 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
-            latitude = mLastLocation.getLatitude();
-            longitude = mLastLocation.getLongitude();
+             latitude = mLastLocation.getLatitude();
+             longitude = mLastLocation.getLongitude();
             //txtCoordinates.setText(latitude + " / " + longitude);
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
@@ -359,17 +312,15 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
 
 
             String address = addresses.get(0).getAddressLine(0);
-
             addressTxt.setText(address);
         } else
-            addressTxt.setText("Couldn't get the location. Make sure location is enable on the device");
+           addressTxt.setText("Couldn't get the location. Make sure location is enable on the device");
 
     }
 
 
 
     private class validateHttpRequest extends AsyncTask<Void, Void, Void> {
-        int idreg;
         String nome;
         String tipo;
         Point pos;
@@ -380,8 +331,7 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
         float prezzo;
 
 
-        public validateHttpRequest( int idreg, String nome, String tipo, Point pos, Date data, String dettagli, Utente utente, int idutente, float prezzo) {
-            this.idreg=idreg;
+        public validateHttpRequest( String nome, String tipo, Point pos, Date data, String dettagli, Utente utente, int idutente, float prezzo) {
             this.nome = nome;
             this.tipo = tipo;
             this.pos = pos;
@@ -390,30 +340,28 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
             this.utente = utente;
             this.idutente = idutente;
             this.prezzo = prezzo;
-
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            //sostituire 0 con l'id
-            Registrazione reg = new Registrazione(idreg,nome,tipo,pos,data,dettagli,utente,idutente,prezzo);
+            Registrazione reg = new Registrazione(0,nome,tipo,pos,data,dettagli,utente,idutente,prezzo);
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<Registrazione> entity = new HttpEntity<>(reg, headers);
-            final String ret =  restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/update_reg",entity,String.class);
+            final String ret =  restTemplate.postForObject("https://whispering-lake-91455.herokuapp.com/save_reg",entity,String.class);
 
 
             new Thread() {
                 public void run() {
-                    ModificaRegistrazione.this.runOnUiThread(new Runnable() {
+                    RegProdActivity.this.runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
-                            if(ret.equals("Registration successfully updated")) {
-                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Modifiche effettuate con successo");
-                                startActivity(new Intent(ModificaRegistrazione.this, RegistrazioneActivity.class));
+                            if(ret.equals("Registration successfully saved")) {
+                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Registrazione effettuata con successo");
+                                startActivity(new Intent(RegProdActivity.this, HomeActivity.class));
                             }
                             else
-                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Non è stato possibile effettuare le modifiche");
+                                CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_error), R.layout.custom_toast_error,  "Non è stato possibile registrare il prodotto");
 
 
 
@@ -429,4 +377,5 @@ public class ModificaRegistrazione extends MenuActivity implements GoogleApiClie
 
 
     }
+
 }

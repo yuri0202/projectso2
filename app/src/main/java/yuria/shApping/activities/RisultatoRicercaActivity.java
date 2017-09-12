@@ -1,4 +1,4 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +12,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import yuria.testmap.ListViewAdapters.RegAdapterCardRicerca;
-import yuria.testmap.models.Registrazione;
+import yuria.shApping.ListViewAdapters.RegAdapterCardRicerca;
+import yuria.shApping.R;
+import yuria.shApping.models.Registrazione;
 
-public class RisultatoRicerca extends MenuActivity {
+public class RisultatoRicercaActivity extends MenuActivity {
     ListView itemList;
     Button homeBtn,indietroBtn;
     ArrayList<Registrazione> regLista=null;
@@ -40,7 +41,7 @@ public class RisultatoRicerca extends MenuActivity {
         indietroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(RisultatoRicerca.this,RicProdActivity.class));
+                //startActivity(new Intent(RisultatoRicercaActivity.this,RicProdActivity.class));
                 onBackPressed();
 
 

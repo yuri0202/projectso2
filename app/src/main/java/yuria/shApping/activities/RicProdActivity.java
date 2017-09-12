@@ -1,4 +1,4 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -44,8 +44,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import yuria.testmap.models.Registrazione;
-import yuria.testmap.models.Ricerca;
+import yuria.shApping.R;
+import yuria.shApping.models.Registrazione;
+import yuria.shApping.models.Ricerca;
+import yuria.shApping.resources.CustomToast;
 
 import static java.util.Arrays.asList;
 
@@ -423,7 +425,7 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                                     System.out.println(regLista.size());
 
                                 }
-                                Intent int1 = new Intent(RicProdActivity.this, RisultatoRicerca.class);
+                                Intent int1 = new Intent(RicProdActivity.this, RisultatoRicercaActivity.class);
                                 int1.putExtra("reg", regLista);
 
                                 startActivity(int1);

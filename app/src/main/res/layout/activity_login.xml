@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:background="@color/backGround"
-    tools:context="yuria.testmap.LoginActivity"
+    tools:context="yuria.shApping.activities.LoginActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 

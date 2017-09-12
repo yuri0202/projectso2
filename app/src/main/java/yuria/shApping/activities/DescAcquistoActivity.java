@@ -1,6 +1,5 @@
-package yuria.testmap;
+package yuria.shApping.activities;
 
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -14,7 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import yuria.testmap.models.Registrazione;
+import yuria.shApping.R;
+import yuria.shApping.models.Registrazione;
 
 public class DescAcquistoActivity extends MenuActivity {
     Button OkBtn = null;

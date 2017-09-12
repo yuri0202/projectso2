@@ -1,4 +1,4 @@
-package yuria.testmap.serializers;
+package yuria.shApping.serializers;
 
 import java.io.IOException;
 import com.fasterxml.jackson.core.JsonGenerator;

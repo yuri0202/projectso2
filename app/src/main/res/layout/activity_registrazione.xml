@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGround"
-    tools:context="yuria.testmap.RegistrazioneActivity"
+    tools:context="yuria.shApping.activities.RegistrazioneActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 

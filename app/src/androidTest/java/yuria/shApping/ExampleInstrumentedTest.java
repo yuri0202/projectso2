@@ -1,4 +1,4 @@
-package yuria.testmap;
+package yuria.shApping;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

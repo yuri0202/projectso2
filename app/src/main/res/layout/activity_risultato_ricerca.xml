@@ -7,7 +7,7 @@
     android:background="@color/backGround"
 
 
-    tools:context="yuria.testmap.RisultatoRicerca">
+    tools:context="yuria.shApping.activities.RisultatoRicercaActivity">
 
 
     <Button

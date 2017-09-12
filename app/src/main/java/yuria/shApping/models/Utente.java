@@ -1,4 +1,4 @@
-package yuria.testmap.models;
+package yuria.shApping.models;
 
 import java.io.Serializable;
 
