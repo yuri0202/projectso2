@@ -43,28 +43,22 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
 
     private GoogleMap mMap;
     Registrazione regCurr = null;
-
     Button routeButton;
     Point actualPos;
-
     Location mLastLocation = null;
     GoogleApiClient mGoogleApiClient = null;
     private static final int MY_PERMISSION_REQUEST_CODE = 7171;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 7172;
     double longitude = 0, latitude = 0;
-    private Location mLocation;
     private LocationRequest mLocationRequest;
-    private boolean mRequestingLocationUpdates = true;
-    private static final String TAG = "debug";
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
-
-
     private static int UPDATE_INTERVAL = 0; // SEC
     private static int FATEST_INTERVAL = 0; // SEC
     private static int DISPLACEMENT = 10; // METERS
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        //Request permission for GPS
         switch (requestCode) {
             case MY_PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -87,12 +81,13 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION
             }, MY_PERMISSION_REQUEST_CODE);
-        } else {
+        } else {//Activate services
             if (checkPlayServices()) {
                 buildGoogleApiClient();
                 createLocationRequest();
             }
         }
+        //Get registration info from extra
         Bundle bun = getIntent().getExtras();
         regCurr = (Registrazione) bun.get("reg");
 
@@ -116,7 +111,7 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
                     }
                     catch(ActivityNotFoundException innerEx)
                     {
-                      //  Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
+
                     }
                 }
 
@@ -130,21 +125,12 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
 
 
 
-       // setMarkers();
-
-
     }
 
     private void setMarkers() {
 
-
+        //set markers on the map
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-
-       /* if (actualPos!=null) {
-            LatLng first = new LatLng(actualPos.getX(), actualPos.getY());
-            mMap.addMarker(new MarkerOptions().position(first).title("Sei qui"));
-            builder.include(first);
-        }*/
 
         LatLng first = new LatLng(actualPos.getX(), actualPos.getY());
         mMap.addMarker(new MarkerOptions().position(first).title("Sei qui")).showInfoWindow();
@@ -152,30 +138,19 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
 
         LatLng second = new LatLng(regCurr.getPos().getX(),regCurr.getPos().getY());
         mMap.addMarker(new MarkerOptions().position(second).title("Acquisto: "+regCurr.getNome())).showInfoWindow();
-        float zoomLevel = (float) 14.0;
 
 
         builder.include(second);
         LatLngBounds bounds = builder.build();
         int padding = (int) (getResources().getDisplayMetrics().heightPixels * 0.20);
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,padding);
-        //CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(second, zoomLevel);
         mMap.animateCamera(cu);
-        //mMap.moveCamera( CameraUpdateFactory.newLatLng(second));
-       /* mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                //Toast.makeText(MapsActivity.this, "Hai cliccato sul marker", Toast.LENGTH_SHORT).show();
-                Intent int1 = new Intent(MapsActivity.this, DescAcquistoActivity.class);
-                int1.putExtra("activity","map");
-                startActivity(int1);
-                return true;
-            }
-        });*/
+
     }
 
 
     private void getCurrPosition() {
+        // get user's current position
         if (ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
            return;
@@ -196,21 +171,11 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
 
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-
-       // init();
     }
 
     @Override
@@ -249,9 +214,7 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API).build();
 
-        //Fix first time run app if permission doesn't grant yet so can't get anything
         mGoogleApiClient.connect();
-
 
     }
 
@@ -283,7 +246,6 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        //displayLocation();
             getCurrPosition();
             startLocationUpdates();
     }
@@ -303,7 +265,6 @@ public class MapsActivity extends MenuActivity implements OnMapReadyCallback,Goo
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
-        //displayLocation();
     }
 
 

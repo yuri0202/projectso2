@@ -32,11 +32,11 @@ public class MenuActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.menuHome)
         {
-            //Home Menu is clicked
+            //Home menuitem is selected
             startActivity(new Intent(this,HomeActivity.class));
         }
         else if (id== R.id.menuLogout){
-            //Logout menu is clicked
+            //Logout menuitem is selected
 
             CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_success), R.layout.custom_toast,  "Logout effettuato con successo");
             MenuActivity.utente=null;
@@ -44,7 +44,7 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         else if (id == R.id.menuRegistrazioni) {
-            //Menu registrazioni is clicked
+            //Registrazioni menuitem is selected
             startActivity(new Intent(this,RegistrazioneActivity.class));
         }
 

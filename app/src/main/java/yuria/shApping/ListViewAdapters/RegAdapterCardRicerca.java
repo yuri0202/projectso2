@@ -22,6 +22,8 @@ import yuria.shApping.models.Registrazione;
 
 public class RegAdapterCardRicerca extends ArrayAdapter<Registrazione> {
 
+    //Adapter for CardView into Ricerca
+
     public RegAdapterCardRicerca(Context context, ArrayList<Registrazione> regs)
     {
         super(context,0,regs);

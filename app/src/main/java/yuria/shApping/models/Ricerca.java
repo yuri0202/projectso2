@@ -13,6 +13,7 @@ import yuria.shApping.serializers.PointToJsonSerializer;
  */
 
 public class Ricerca implements Serializable {
+    //Represent a search into Ricerca Registrazione activity
     private String tipo;
     private Date dataDa;
     private Date dataA;

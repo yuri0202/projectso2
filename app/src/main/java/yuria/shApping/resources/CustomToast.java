@@ -12,6 +12,8 @@ import yuria.shApping.R;
 
 
 public class CustomToast {
+
+    //Customize toast
     public static final int ERROR=0, SUCCESS=1, WARNING=2;
 
     public static void create_custom_toast(Context applicationContext, LayoutInflater inflater, ViewGroup myViewGroup, int layout_id, String message) {

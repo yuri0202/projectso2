@@ -41,7 +41,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //System.out.println("ENTRO");
+        initiWidgets();
+
+    }
+
+    private void initiWidgets() {
+        // Create refs for all widgets
+
         loginBtn = (Button) findViewById(R.id.okBtn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private class validateHttpRequest extends AsyncTask<Void, Void, Void> {
         String username;
@@ -68,13 +76,11 @@ public class LoginActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             Utente utente=null;
             utenteLoggato = new Utente(0, username, password, null, null);
-            //System.out.println(utenteLoggato.getUsername() + " "+ utenteLoggato.getPassword());
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<Utente> entity = new HttpEntity<>(utenteLoggato, headers);
             try {
 
                 final Utente finalUtente = restTemplate.exchange("https://whispering-lake-91455.herokuapp.com/auth_user", HttpMethod.POST, entity, Utente.class).getBody();
-                //final HttpStatus hs = response.getStatusCode();
 
                 new Thread() {
                     public void run() {

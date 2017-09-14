@@ -62,7 +62,7 @@ public class RegistrazioneActivity extends MenuActivity {
         indietroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //populateListView();
+
                 startActivity(new Intent(RegistrazioneActivity.this, HomeActivity.class));
             }
         });
@@ -75,8 +75,6 @@ public class RegistrazioneActivity extends MenuActivity {
     private void populateListView(int code) {
 
         //code == 1, user has atleast 1 registration, 0 otherwise
-
-
         if(code==1) {
             ArrayList<Registrazione> reg = new ArrayList<>();
             int i = 0;
@@ -114,19 +112,13 @@ public class RegistrazioneActivity extends MenuActivity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            //System.out.println(utenteLoggato.getUsername() + " "+ utenteLoggato.getPassword());
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
             HttpEntity<Integer> entity = new HttpEntity<Integer>(idutente, headers);
             try {
-                //final Utente finalUtente;
                 List<Registrazione> regs = new ArrayList<>();
-
                 regs= Arrays.asList(restTemplate.exchange("https://whispering-lake-91455.herokuapp.com/reg_by_user", HttpMethod.POST, entity, Registrazione[].class).getBody());
                 regLista=regs;
-                //final HttpStatus hs = response.getStatusCode();
-
-
                 new Thread() {
                     public void run() {
                         activity.runOnUiThread(new Runnable() {
@@ -137,8 +129,6 @@ public class RegistrazioneActivity extends MenuActivity {
                                     populateListView(0);
                                  else
                                      populateListView(1);
-
-
                             }
                         });
                     }

@@ -56,11 +56,10 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
     Button cercaBtn, homeBtn, scegliDaBtn, scegliABtn;
     EditText dataDaTxt,dataATxt,prezzoDaTxt,prezzoATxt,distanzaTxt;
     Spinner tipoSpinner;
-    
+
     final Activity activity = this;
     ArrayList<Registrazione> regLista = null;
     RestTemplate restTemplate = new RestTemplate();
-    //final int idutentefinal = MenuActivity.utente.getIdutente();
     private List<MediaType> acceptableMediaTypes = asList(MediaType.APPLICATION_JSON);
     HttpHeaders headers = new HttpHeaders() {{
         setAccept(acceptableMediaTypes);
@@ -208,9 +207,6 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
                 if (mLastLocation != null) {
                     latitude = mLastLocation.getLatitude();
                     longitude = mLastLocation.getLongitude();
-                    /*
-                    dataDaTxt.setText(Double.toString(latitude));
-                    dataATxt.setText(Double.toString(longitude));*/
                     pos =  geometryFactory.createPoint(new Coordinate(latitude, longitude));
                 }else{
                     CustomToast.create_custom_toast(getApplicationContext(), getLayoutInflater(), (ViewGroup) findViewById(R.id.custom_toast_container_warning), R.layout.custom_toast_warning,  "Attiva GPS");
@@ -219,9 +215,6 @@ public class RicProdActivity extends MenuActivity implements GoogleApiClient.Con
 
                 new RicProdActivity.validateHttpRequest(tipo,dataDa,dataA,prezzoDa,prezzoA,distanza,pos,MenuActivity.utente.getIdutente()).execute();
 
-
-                //Request http validate blabla
-                // costruttore, lancia, via
             }
         });
 

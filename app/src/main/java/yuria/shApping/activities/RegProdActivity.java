@@ -60,20 +60,14 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
     private static final int MY_PERMISSION_REQUEST_CODE = 7171;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 7172;
     double longitude = 0, latitude = 0;
-    private Location mLocation;
     private LocationRequest mLocationRequest;
     private boolean mRequestingLocationUpdates = true;
-    private static final String TAG = "debug";
 
-    final Activity activity = this;
     RestTemplate restTemplate = new RestTemplate();
     private List<MediaType> acceptableMediaTypes = asList(MediaType.APPLICATION_JSON);
     HttpHeaders headers = new HttpHeaders() {{
         setAccept(acceptableMediaTypes);
     }};
-
-
-
 
     private static int UPDATE_INTERVAL = 5000; // SEC
     private static int FATEST_INTERVAL = 3000; // SEC
@@ -173,7 +167,6 @@ public class RegProdActivity extends MenuActivity implements ConnectionCallbacks
                 GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
                 newPoint = geometryFactory.createPoint(new Coordinate(lat, lon));
 
-               // Date nowDate = Calendar.getInstance().getTime();
                 Date nowDate = new Date();
                 String details = "";
                 if (!detailsTxt.getText().toString().equals(""))

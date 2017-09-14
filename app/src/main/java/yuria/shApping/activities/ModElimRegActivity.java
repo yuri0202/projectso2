@@ -36,10 +36,9 @@ public class ModElimRegActivity extends MenuActivity {
 
 
     Button modBtn = null,elimBtn=null;
-    String previousActivity = null;
     Registrazione regCurr = null;
-    final Activity activity = this;
     List<Registrazione> regLista = null;
+    DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     TextView tipoTxt,nomeTxt,dataTxt,prezzoTxt,dettagliTxt,posTxt,utenteTxt;
     RestTemplate restTemplate = new RestTemplate();
     private List<MediaType> acceptableMediaTypes = asList(MediaType.APPLICATION_JSON);
@@ -51,6 +50,7 @@ public class ModElimRegActivity extends MenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mod_elim_reg);
+        // Get registration's infos from intent
         Bundle bun = getIntent().getExtras();
         regCurr = (Registrazione) bun.get("reg");
 
@@ -61,6 +61,8 @@ public class ModElimRegActivity extends MenuActivity {
     }
 
     private void setRegInfo() {
+
+        //Show infos
         double latitude = regCurr.getPos().getX();
         double longitude = regCurr.getPos().getY();
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -72,7 +74,7 @@ public class ModElimRegActivity extends MenuActivity {
             e.printStackTrace();
         }
 
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
 
 
         utenteTxt.setText(regCurr.getUtente().getNome() +" "+regCurr.getUtente().getCognome());
@@ -86,6 +88,8 @@ public class ModElimRegActivity extends MenuActivity {
     }
 
     private void initWidgets() {
+
+        // Create refs for all widgets
 
         modBtn = (Button) findViewById(R.id.modificaBtn);
         elimBtn = (Button) findViewById(R.id.EliminaBtn);

@@ -17,13 +17,12 @@ public class HomeActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initWidgets();
-       // Toast.makeText(this, MenuActivity.utente.getUsername(), Toast.LENGTH_LONG).show();
     }
 
 
 
     private void initWidgets() {
-
+        // Create refs for all widgets
         ricpro = (Button) findViewById(R.id.ricprodBtn);
         regpro = (Button) findViewById(R.id.regprodBtn);
 

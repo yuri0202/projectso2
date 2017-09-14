@@ -21,16 +21,15 @@ public class DescAcquistoActivity extends MenuActivity {
     String previousActivity = null;
     Registrazione regCurr = null;
     TextView tipoTxt,nomeTxt,dataTxt,prezzoTxt,dettagliTxt,posTxt,utenteTxt;
+    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desc_acquisto);
+        //Get registration infos from intent
         Bundle bun = getIntent().getExtras();
         regCurr = (Registrazione) bun.get("reg");
-       // Toast.makeText(this,"Reg: "+regCurr.getNome() + "  "+regCurr.getTipo(),Toast.LENGTH_SHORT).show();
-
-
         initWidgets();
         setRegInfo();
 
@@ -49,20 +48,20 @@ public class DescAcquistoActivity extends MenuActivity {
             e.printStackTrace();
         }
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 
+        //Show registration's infos
         utenteTxt.setText(regCurr.getUtente().getNome() +" "+regCurr.getUtente().getCognome());
         nomeTxt.setText(regCurr.getNome());
         tipoTxt.setText(regCurr.getTipo());
         dataTxt.setText(df.format(regCurr.getData()));
-
         prezzoTxt.setText(Float.toString(regCurr.getPrezzo())+" €");
         posTxt.setText(addresses.get(0).getAddressLine(0));
         dettagliTxt.setText(regCurr.getDettagli());
     }
 
     private void initWidgets() {
+        // Create refs for all widgets
 
         OkBtn = (Button) findViewById(R.id.indietroRicBtn);
         OkBtn.setOnClickListener(new View.OnClickListener() {

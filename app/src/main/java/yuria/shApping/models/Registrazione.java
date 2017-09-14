@@ -19,6 +19,7 @@ import yuria.shApping.serializers.PointToJsonSerializer;
 
 
 public class Registrazione implements Serializable{
+    //Represent a registration
 
     private int idreg;
     private String nome;

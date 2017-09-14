@@ -43,12 +43,8 @@ public class RisultatoRicercaActivity extends MenuActivity {
             public void onClick(View v) {
                 //startActivity(new Intent(RisultatoRicercaActivity.this,RicProdActivity.class));
                 onBackPressed();
-
-
             }
         });
-
-
         Bundle bun = getIntent().getExtras();
         regLista = (ArrayList<Registrazione>) bun.get("reg");
         if(regLista.size()==0)
@@ -59,10 +55,7 @@ public class RisultatoRicercaActivity extends MenuActivity {
     }
 
     private void populateListView(int code) {
-
         //code == 1, user has atleast 1 registration, 0 otherwise
-
-
         if(code==1) {
             ArrayList<Registrazione> reg = new ArrayList<>();
             int i = 0;
@@ -76,17 +69,10 @@ public class RisultatoRicercaActivity extends MenuActivity {
             }
             regMap = tempMap;
             RegAdapterCardRicerca adapter = new RegAdapterCardRicerca(this,reg);
-
             itemList.setAdapter(adapter);
-
             itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    /*
-                    Intent int1 = new Intent(RegistrazioneActivity.this, DescAcquistoActivity.class);
-                    int1.putExtra("activity", "registrazione");
-                    int1.putExtra("reg", regMap.get(position));
-                    startActivity(int1);*/
                 }
             });
         }

@@ -58,7 +58,6 @@ public class ModificaRegistrazioneActivity extends MenuActivity implements Googl
     private static final int MY_PERMISSION_REQUEST_CODE = 7171;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 7172;
     double longitude = 0, latitude = 0;
-    private Location mLocation;
     private LocationRequest mLocationRequest;
     private boolean mRequestingLocationUpdates = true;
     private static final String TAG = "debug";
@@ -66,17 +65,11 @@ public class ModificaRegistrazioneActivity extends MenuActivity implements Googl
     Registrazione regCurr = null;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
-
-    final Activity activity = this;
     RestTemplate restTemplate = new RestTemplate();
     private List<MediaType> acceptableMediaTypes = asList(MediaType.APPLICATION_JSON);
     HttpHeaders headers = new HttpHeaders() {{
         setAccept(acceptableMediaTypes);
     }};
-
-
-
-
     private static int UPDATE_INTERVAL = 5000; // SEC
     private static int FATEST_INTERVAL = 3000; // SEC
     private static int DISPLACEMENT = 10; // METERS
@@ -108,6 +101,7 @@ public class ModificaRegistrazioneActivity extends MenuActivity implements Googl
     }
 
     private void initWidget() {
+
         IndietroBtn = (Button) findViewById(R.id.indietroRicBtn);
         posBtn = (Button) findViewById(R.id.positionBtn);
         modBtn = (Button) findViewById(R.id.RegistraBtn);
@@ -173,7 +167,8 @@ public class ModificaRegistrazioneActivity extends MenuActivity implements Googl
     }
 
     private int getSpinnerIndexByValue(Spinner spinner, String value) {
-        int index = 0;
+        //Get the id of the spinner where a certain value appears, returns -1 if the value is not present
+        int index = -1;
         for (int i =0; i<spinner.getCount();i++){
             if(spinner.getItemAtPosition(i).toString().equalsIgnoreCase(value)) {
                 index = i;
@@ -183,8 +178,6 @@ public class ModificaRegistrazioneActivity extends MenuActivity implements Googl
         return index;
     }
     private void registraProdotto() {
-
-
 
         List<Address> add = null;
         String ind = null;
@@ -208,11 +201,7 @@ public class ModificaRegistrazioneActivity extends MenuActivity implements Googl
             }else{
                 double lat = add.get(0).getLatitude();
                 double lon = add.get(0).getLongitude();
-
                 newPoint = geometryFactory.createPoint(new Coordinate(lat, lon));
-
-                // Date nowDate = Calendar.getInstance().getTime();
-                Date nowDate = new Date();
                 String details = "";
                 if (!detailsTxt.getText().toString().equals(""))
                     details=detailsTxt.getText().toString();
@@ -348,7 +337,6 @@ public class ModificaRegistrazioneActivity extends MenuActivity implements Googl
         if (mLastLocation != null) {
             latitude = mLastLocation.getLatitude();
             longitude = mLastLocation.getLongitude();
-            //txtCoordinates.setText(latitude + " / " + longitude);
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
             List<Address> addresses  = null;
@@ -396,7 +384,6 @@ public class ModificaRegistrazioneActivity extends MenuActivity implements Googl
 
         @Override
         protected Void doInBackground(Void... params) {
-            //sostituire 0 con l'id
             Registrazione reg = new Registrazione(idreg,nome,tipo,pos,data,dettagli,utente,idutente,prezzo);
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<Registrazione> entity = new HttpEntity<>(reg, headers);

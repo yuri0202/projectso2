@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class Utente implements Serializable{
+    //Represent an user
 
 
     private int idutente;

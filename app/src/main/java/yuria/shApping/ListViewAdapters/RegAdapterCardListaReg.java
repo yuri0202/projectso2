@@ -21,6 +21,7 @@ import yuria.shApping.models.Registrazione;
  */
 
 public class RegAdapterCardListaReg extends ArrayAdapter<Registrazione> {
+    // Adapter for CardView into lLista Registrazioni
 
     public RegAdapterCardListaReg(Context context, ArrayList<Registrazione> regs)
     {
@@ -52,13 +53,9 @@ public class RegAdapterCardListaReg extends ArrayAdapter<Registrazione> {
             @Override
             public void onClick(View v) {
                 showDetails(v);
-
-
             }
         });
         return convertView;
-
-
     }
 
 
